@@ -1,0 +1,316 @@
+﻿@{
+    ViewBag.Title = "Manage Jobs | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Back to Dashboard Button -->
+<div class="back-home-btn">
+    <a href="/Employer/Dashboard" class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard
+    </a>
+</div>
+
+<!-- Header Section -->
+<section class="bg-gradient text-white py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <h1 class="fw-bold mb-2"><i class="fa-solid fa-briefcase me-2"></i>Manage Job Postings</h1>
+                <p class="lead mb-0">View, edit, and track all your job listings</p>
+            </div>
+            <a href="/Employer/PostJob" class="btn btn-light btn-lg fw-semibold shadow mt-3 mt-md-0">
+                <i class="fa-solid fa-plus me-2"></i> Post New Job
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Overview -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                    <h3 class="fw-bold text-primary mb-0">18</h3>
+                    <small class="text-muted">Total Jobs</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                    <h3 class="fw-bold text-success mb-0">12</h3>
+                    <small class="text-muted">Active</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                    <h3 class="fw-bold text-warning mb-0">3</h3>
+                    <small class="text-muted">Drafts</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-3">
+                    <h3 class="fw-bold text-secondary mb-0">3</h3>
+                    <small class="text-muted">Closed</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Tabs -->
+<section class="py-4">
+    <div class="container">
+        <ul class="nav nav-pills mb-4">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">All Jobs (18)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Active (12)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Drafts (3)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Closed (3)</a>
+            </li>
+        </ul>
+
+        <!-- Jobs Table -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Job Title</th>
+                                <th>Location</th>
+                                <th>Type</th>
+                                <th>Applicants</th>
+                                <th>Status</th>
+                                <th>Posted</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Job Row 1 -->
+                            <tr>
+                                <td class="ps-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Senior Software Engineer</h6>
+                                        <small class="text-muted">$120k - $160k</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">Remote</span>
+                                </td>
+                                <td>Full-time</td>
+                                <td>
+                                    <span class="badge bg-info fs-6">47</span>
+                                    <small class="text-muted ms-1">applicants</small>
+                                </td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td class="text-muted small">Oct 10, 2025</td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" title="View">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary" title="Edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger" title="Close">
+                                            <i class="fa-solid fa-times"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Job Row 2 -->
+                            <tr>
+                                <td class="ps-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Frontend Developer</h6>
+                                        <small class="text-muted">$90k - $130k</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">Hybrid</span>
+                                </td>
+                                <td>Full-time</td>
+                                <td>
+                                    <span class="badge bg-info fs-6">32</span>
+                                    <small class="text-muted ms-1">applicants</small>
+                                </td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td class="text-muted small">Oct 15, 2025</td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" title="View">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary" title="Edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger" title="Close">
+                                            <i class="fa-solid fa-times"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Job Row 3 -->
+                            <tr>
+                                <td class="ps-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Product Manager</h6>
+                                        <small class="text-muted">$110k - $150k</small>
+                                    </div>
+                                </td>
+                                <td>New York, NY</td>
+                                <td>Full-time</td>
+                                <td>
+                                    <span class="badge bg-info fs-6">28</span>
+                                    <small class="text-muted ms-1">applicants</small>
+                                </td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td class="text-muted small">Oct 12, 2025</td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" title="View">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary" title="Edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger" title="Close">
+                                            <i class="fa-solid fa-times"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Job Row 4 (Draft) -->
+                            <tr class="table-warning">
+                                <td class="ps-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">UX Designer</h6>
+                                        <small class="text-muted">$85k - $120k</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">Remote</span>
+                                </td>
+                                <td>Full-time</td>
+                                <td>
+                                    <span class="badge bg-secondary fs-6">0</span>
+                                    <small class="text-muted ms-1">applicants</small>
+                                </td>
+                                <td><span class="badge bg-warning text-dark">Draft</span></td>
+                                <td class="text-muted small">Oct 18, 2025</td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" title="View">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary" title="Edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-success" title="Publish">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Job Row 5 (Closed) -->
+                            <tr class="table-secondary">
+                                <td class="ps-4">
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-muted">Backend Developer</h6>
+                                        <small class="text-muted">$100k - $140k</small>
+                                    </div>
+                                </td>
+                                <td>San Francisco, CA</td>
+                                <td>Full-time</td>
+                                <td>
+                                    <span class="badge bg-secondary fs-6">65</span>
+                                    <small class="text-muted ms-1">applicants</small>
+                                </td>
+                                <td><span class="badge bg-secondary">Closed</span></td>
+                                <td class="text-muted small">Sep 20, 2025</td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" title="View">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-success" title="Reopen">
+                                            <i class="fa-solid fa-redo"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger" title="Delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Jobs pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<style>
+.back-home-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.back-home-btn.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+.job-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15) !important;
+}
+</style>
+
+<script>
+    // Fade out back button on scroll
+    window.addEventListener('scroll', function() {
+        const backBtn = document.querySelector('.back-home-btn');
+        const scrollPosition = window.scrollY;
+        
+        // Start fading after 100px scroll
+        if (scrollPosition > 100) {
+            backBtn.classList.add('fade-out');
+        } else {
+            backBtn.classList.remove('fade-out');
+        }
+    });
+</script>

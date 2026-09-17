@@ -1,0 +1,206 @@
+﻿@{
+    ViewBag.Title = "Dashboard | JobFinder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Simulate logged-in user role (for demo)
+    // In real app, this comes from session or auth claim.
+    string userRole = ViewBag.Role ?? "Applicant"; // or "Employer"
+}
+
+<section class="dashboard-section py-4 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <h2 class="fw-bold text-primary mb-0">JobFinder Dashboard</h2>
+            <div class="d-flex gap-2 align-items-center">
+                @if (userRole == "Applicant")
+                {
+                    <a href="/Applicant/CreateProfile" class="btn btn-outline-primary">
+                        <i class="fa-solid fa-user-plus me-2"A></i>Complete Profile
+                    </a>
+                }
+                else if (userRole == "Employer")
+                {
+                    <a href="/Employer/CreateProfile" class="btn btn-outline-primary">
+                        <i class="fa-solid fa-building-user me-2"></i>Complete Profile
+                    </a>
+                }
+                <span class="badge bg-secondary fs-6">Role: @userRole</span>
+            </div>
+        </div>
+
+        <!-- OVERVIEW CARDS -->
+        <div class="row g-3 mb-5">
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm border-0 text-center p-3 animate-fade">
+                    <div class="icon mb-2 text-primary"><i class="fa-solid fa-briefcase fa-2x"></i></div>
+                    <h5 class="fw-bold">Jobs Posted</h5>
+                    <p class="text-muted mb-0">@((userRole == "Employer") ? "12" : "—")</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm border-0 text-center p-3 animate-fade">
+                    <div class="icon mb-2 text-success"><i class="fa-solid fa-file-lines fa-2x"></i></div>
+                    <h5 class="fw-bold">Applications Sent</h5>
+                    <p class="text-muted mb-0">@((userRole == "Applicant") ? ViewBag.ApplicationCount.ToString() : "—")</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm border-0 text-center p-3 animate-fade">
+                    <div class="icon mb-2 text-warning"><i class="fa-solid fa-robot fa-2x"></i></div>
+                    <h5 class="fw-bold">AI Matches</h5>
+                    <p class="text-muted mb-0">3</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm border-0 text-center p-3 animate-fade">
+                    <div class="icon mb-2 text-info"><i class="fa-solid fa-envelope fa-2x"></i></div>
+                    <h5 class="fw-bold">Messages</h5>
+                    <p class="text-muted mb-0">2</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROLE-BASED CONTENT -->
+        @if (userRole == "Applicant")
+        {
+            <!-- APPLICANT SECTION -->
+            <div class="card border-0 shadow-lg rounded-4 mb-5 animate-slide">
+                <div class="card-body">
+                    <h4 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-tie me-2"></i>Your Recent Applications</h4>
+                    
+                    @if (ViewBag.Applications != null && ViewBag.Applications.Count > 0)
+                    {
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr class="table-light">
+                                    <th>Job Title</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Date Applied</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var app in ViewBag.Applications)
+                                {
+                                    var parts = app.Split('|');
+                                    var statusClass = parts[2] == "Pending" ? "bg-secondary" : (parts[2] == "Accepted" ? "bg-success" : "bg-info");
+                                    <tr>
+                                        <td>@parts[0]</td>
+                                        <td>@parts[1]</td>
+                                        <td><span class="badge @statusClass">@parts[2]</span></td>
+                                        <td>@parts[3]</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end">
+                                        <a href="/Applicant/Jobs" class="btn btn-outline-primary btn-sm">View All Jobs</a>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info border-0">
+                            <i class="fa-solid fa-info-circle me-2"></i>
+                            You haven't applied to any jobs yet. <a href="/Applicant/Jobs" class="alert-link">Browse available jobs</a> to get started!
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else if (userRole == "Employer")
+        {
+            <!-- EMPLOYER SECTION -->
+            <div class="card border-0 shadow-lg rounded-4 mb-5 animate-slide">
+                <div class="card-body">
+                    <h4 class="fw-bold text-primary mb-3"><i class="fa-solid fa-briefcase me-2"></i>Your Active Job Posts</h4>
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr class="table-light">
+                                <th>Title</th>
+                                <th>Applicants</th>
+                                <th>Status</th>
+                                <th>Posted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Backend Developer</td>
+                                <td>15</td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td>Oct 5, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>QA Engineer</td>
+                                <td>8</td>
+                                <td><span class="badge bg-info">Open</span></td>
+                                <td>Oct 10, 2025</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="text-end">
+                                    <a href="/Employer/Jobs" class="btn btn-outline-primary btn-sm">Manage Jobs</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        }
+
+        <!-- COMMON SECTION -->
+        <div class="card border-0 shadow-sm rounded-4 animate-fade">
+            <div class="card-body text-center">
+                <h5 class="fw-bold text-primary"><i class="fa-solid fa-robot me-2"></i>Sphere AI Tips</h5>
+                <p class="text-muted">💡 "Consistency in applications increases your visibility score by 70%. Keep applying!"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.animate-fade, .animate-slide').forEach(el => {
+        el.classList.add('visible');
+    });
+});
+</script>
+
+<style>
+.dashboard-section {
+    min-height: 100vh;
+}
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+}
+.animate-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease forwards;
+}
+.animate-slide {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 1s ease forwards;
+}
+@@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+@@keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+}
+.visible { opacity: 1; transform: none; }
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+</style>
+}

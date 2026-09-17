@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "View Applicants | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="back-home-btn">
+    <a href="/Employer/Jobs" class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Jobs
+    </a>
+</div>
+
+<section class="bg-gradient text-white py-5">
+    <div class="container">
+        <h1 class="fw-bold mb-2"><i class="fa-solid fa-users me-2"></i>Applicants for Senior Software Engineer</h1>
+        <p class="lead mb-0">47 applications • Posted Oct 10, 2025</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">All (47)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shortlisted (12)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Interviewed (5)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Rejected (8)</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-end">
+                <select class="form-select form-select-sm d-inline-block" style="width: auto;">
+                    <option>Best Match</option>
+                    <option>Most Recent</option>
+                    <option>Experience</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Applicant Card 1 -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Applicant">
+                        <span class="badge bg-success d-block">95% Match</span>
+                    </div>
+                    <div class="col-md-7">
+                        <h5 class="fw-bold mb-1">Sarah Johnson</h5>
+                        <p class="text-muted mb-2">Senior Developer • 8 years experience</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge bg-light text-dark">React</span>
+                            <span class="badge bg-light text-dark">Node.js</span>
+                            <span class="badge bg-light text-dark">AWS</span>
+                            <span class="badge bg-light text-dark">TypeScript</span>
+                        </div>
+                        <small class="text-muted"><i class="fa-solid fa-clock me-1"></i>Applied 2 days ago</small>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-primary btn-sm mb-2 w-100">
+                            <i class="fa-solid fa-eye me-1"></i> View Profile
+                        </button>
+                        <button class="btn btn-outline-success btn-sm mb-2 w-100">
+                            <i class="fa-solid fa-check me-1"></i> Shortlist
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm w-100">
+                            <i class="fa-solid fa-times me-1"></i> Reject
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applicant Card 2 -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Applicant">
+                        <span class="badge bg-warning text-dark d-block">88% Match</span>
+                    </div>
+                    <div class="col-md-7">
+                        <h5 class="fw-bold mb-1">Michael Chen</h5>
+                        <p class="text-muted mb-2">Full Stack Engineer • 6 years experience</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge bg-light text-dark">JavaScript</span>
+                            <span class="badge bg-light text-dark">Python</span>
+                            <span class="badge bg-light text-dark">Docker</span>
+                        </div>
+                        <small class="text-muted"><i class="fa-solid fa-clock me-1"></i>Applied 5 days ago</small>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-primary btn-sm mb-2 w-100">
+                            <i class="fa-solid fa-eye me-1"></i> View Profile
+                        </button>
+                        <button class="btn btn-outline-success btn-sm mb-2 w-100">
+                            <i class="fa-solid fa-check me-1"></i> Shortlist
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm w-100">
+                            <i class="fa-solid fa-times me-1"></i> Reject
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applicant Card 3 -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Applicant">
+                        <span class="badge bg-secondary d-block">75% Match</span>
+                    </div>
+                    <div class="col-md-7">
+                        <h5 class="fw-bold mb-1">Emily Rodriguez</h5>
+                        <p class="text-muted mb-2">Software Developer • 4 years experience</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge bg-light text-dark">Java</span>
+                            <span class="badge bg-light text-dark">Spring</span>
+                            <span class="badge bg-light text-dark">MySQL</span>
+                        </div>
+                        <small class="text-muted"><i class="fa-solid fa-clock me-1"></i>Applied 1 week ago</small>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-primary btn-sm mb-2 w-100">
+                            <i class="fa-solid fa-eye me-1"></i> View Profile
+                        </button>
+                        <button class="btn btn-outline-success btn-sm mb-2 w-100">
+                            <i class="fa-solid fa-check me-1"></i> Shortlist
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm w-100">
+                            <i class="fa-solid fa-times me-1"></i> Reject
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.back-home-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.back-home-btn.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+</style>
+
+<script>
+    // Fade out back button on scroll
+    window.addEventListener('scroll', function() {
+        const backBtn = document.querySelector('.back-home-btn');
+        const scrollPosition = window.scrollY;
+        
+        // Start fading after 100px scroll
+        if (scrollPosition > 100) {
+            backBtn.classList.add('fade-out');
+        } else {
+            backBtn.classList.remove('fade-out');
+        }
+    });
+</script>

@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "Employer Home | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Back to Home Button -->
+<div class="back-home-btn">
+    <a href="/" class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Home
+    </a>
+</div>
+
+<!-- ========================= HERO SECTION ========================= -->
+<section class="employer-hero py-5 text-white text-center d-flex align-items-center">
+    <div class="container">
+        <h1 class="fw-bold display-5 animate-fade">Welcome to HireSphere for Employers 👋</h1>
+        <p class="lead mb-4 text-light">
+            Discover top talent faster with <span class="fw-semibold text-warning">AI-powered hiring</span> designed to simplify recruitment.
+        </p>
+        <a href="/Employer/Dashboard" class="btn btn-light btn-lg fw-semibold shadow-sm animate-pop">
+            <i class="fa-solid fa-chart-line me-2"></i> Go to Dashboard
+        </a>
+    </div>
+</section>
+
+<!-- ========================= OVERVIEW CARDS ========================= -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-slide">
+                    <div class="icon text-primary mb-2"><i class="fa-solid fa-briefcase fa-2x"></i></div>
+                    <h6 class="fw-bold">Jobs Posted</h6>
+                    <p class="text-muted mb-0 fs-5">—</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-slide">
+                    <div class="icon text-success mb-2"><i class="fa-solid fa-users fa-2x"></i></div>
+                    <h6 class="fw-bold">Applicants</h6>
+                    <p class="text-muted mb-0 fs-5">—</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-slide">
+                    <div class="icon text-warning mb-2"><i class="fa-solid fa-robot fa-2x"></i></div>
+                    <h6 class="fw-bold">AI Matches</h6>
+                    <p class="text-muted mb-0 fs-5">—</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-slide">
+                    <div class="icon text-info mb-2"><i class="fa-solid fa-envelope fa-2x"></i></div>
+                    <h6 class="fw-bold">Messages</h6>
+                    <p class="text-muted mb-0 fs-5">—</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= AI INSIGHTS SECTION ========================= -->
+<section class="py-5">
+    <div class="container">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate-fade">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-5">
+                    <img src="~/images/ai-matching.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/260312/screenshots/17973155/media/efb9b0124f3cc9f15492f0b5ce0283a8.gif';"
+                         alt="AI Hiring Insights" class="img-fluid">
+                </div>
+                <div class="col-md-7 p-4">
+                    <h4 class="fw-bold text-primary mb-3"><i class="fa-solid fa-brain me-2"></i>AI Hiring Insights</h4>
+                    <p class="text-muted mb-3">
+                        HireSphere’s AI engine helps you make data-driven hiring decisions by identifying the most suitable candidates faster.
+                    </p>
+                    <ul class="list-unstyled mb-4">
+                        <li><i class="fa-solid fa-circle-check text-success me-2"></i> Smart skill-based job matching</li>
+                        <li><i class="fa-solid fa-circle-check text-success me-2"></i> Real-time talent discovery</li>
+                        <li><i class="fa-solid fa-circle-check text-success me-2"></i> Predictive candidate recommendations</li>
+                    </ul>
+                    <a href="/Employer/Dashboard" class="btn btn-primary fw-semibold shadow-sm">
+                        <i class="fa-solid fa-rocket me-1"></i> Explore Insights
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= FEATURE SHOWCASE ========================= -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="fw-bold text-primary mb-4">Why Employers Love HireSphere</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card feature-card border-0 shadow-sm p-3 animate-fade">
+                    <img src="~/images/talent-management.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/1692479/screenshots/14980836/media/a06d2c2c9cce4e70358de3b0128b7328.gif';"
+                         class="img-fluid rounded mb-3" alt="Talent Management">
+                    <h5 class="fw-bold">Talent Management</h5>
+                    <p class="text-muted small">Organize applicants efficiently, manage interviews, and stay on top of your hiring process.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card border-0 shadow-sm p-3 animate-fade">
+                    <img src="~/images/ai-engine.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/userupload/12395027/file/original-8af8e41d38a76e4e3ad4b502a54e74e4.gif';"
+                         class="img-fluid rounded mb-3" alt="AI Automation">
+                    <h5 class="fw-bold">AI-Powered Automation</h5>
+                    <p class="text-muted small">Let AI handle the tedious parts — filtering, ranking, and recommending the best-fit candidates.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card border-0 shadow-sm p-3 animate-fade">
+                    <img src="~/images/analytics.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/userupload/10176261/file/original-64f251f98327aee861a26650a8ed8b14.gif';"
+                         class="img-fluid rounded mb-3" alt="Performance Insights">
+                    <h5 class="fw-bold">Performance Insights</h5>
+                    <p class="text-muted small">Gain real-time analytics to measure campaign success and optimize your job postings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= CTA SECTION ========================= -->
+<section class="py-5 text-center bg-gradient text-white">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Start Hiring Smarter with HireSphere 🚀</h2>
+        <p class="lead mb-4">Empower  your business with AI-driven recruitment tools designed to save time and find top talent faster.</p>
+        <a href="/Employer/Dashboard" class="btn btn-light btn-lg fw-semibold shadow-sm">
+            <i class="fa-solid fa-chart-line me-2"></i> Go to Dashboard
+        </a>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Trigger animations
+    document.querySelectorAll('.animate-fade, .animate-pop, .animate-slide').forEach(el => {
+        el.classList.add('visible');
+    });
+
+    // Add interactive hover effects to cards
+    document.querySelectorAll('.stat-card, .feature-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Add pulse effect to dashboard button
+    const dashboardBtn = document.querySelector('.employer-hero .btn');
+    if (dashboardBtn) {
+        setInterval(() => {
+            dashboardBtn.classList.add('pulse');
+            setTimeout(() => dashboardBtn.classList.remove('pulse'), 1000);
+        }, 5000);
+    }
+});
+</script>
+
+<style>
+.back-home-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+}
+.employer-hero {
+    background: linear-gradient(135deg, #2563eb, #22c1c3);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+.stat-card, .feature-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.stat-card:hover, .feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 1.5rem 3rem rgba(37, 99, 235, 0.2);
+}
+.stat-card .icon, .feature-card i {
+    transition: transform 0.3s ease;
+}
+.stat-card:hover .icon, .feature-card:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+.animate-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease forwards;
+}
+.animate-slide {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 1s ease forwards;
+}
+.animate-pop {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: popIn 0.8s ease forwards;
+}
+@@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+@@keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+@@keyframes popIn { to { opacity: 1; transform: scale(1); } }
+.visible { opacity: 1; transform: none; }
+img.img-fluid {
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+img.img-fluid:hover {
+    transform: scale(1.05);
+}
+.pulse {
+    animation: pulse 1s ease;
+}
+@@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+@@media (max-width: 768px) {
+    .back-home-btn {
+        top: 70px;
+        left: 10px;
+    }
+}
+</style>
+}

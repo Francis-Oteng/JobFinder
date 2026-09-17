@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Title = "Complete Your Profile | JobFinder";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
+
+<div class="create-profile-container d-flex align-items-center justify-content-center min-vh-100 bg-gradient py-5">
+    <div class="card shadow-lg rounded-4 p-5" style="max-width: 800px; width: 95%;">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <div class="mb-3">
+                <div class="profile-icon-wrapper mx-auto" style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-user-circle fa-4x text-white"></i>
+                </div>
+            </div>
+            <h2 class="fw-bold text-primary mb-2">Welcome to JobFinder! 🎉</h2>
+            <p class="text-muted">Let's set up your professional profile to help you land your dream job</p>
+            
+            <!-- Progress Steps -->
+            <div class="d-flex justify-content-center align-items-center gap-2 mt-4">
+                <div class="d-flex flex-column align-items-center">
+                    <span class="badge bg-primary rounded-circle mb-1" style="width: 35px; height: 35px; line-height: 25px; font-size: 14px;">1</span>
+                    <small class="text-primary fw-semibold">Profile</small>
+                </div>
+                <div style="width: 60px; height: 2px; background: #dee2e6; margin-bottom: 20px;"></div>
+                <div class="d-flex flex-column align-items-center">
+                    <span class="badge bg-secondary rounded-circle mb-1" style="width: 35px; height: 35px; line-height: 25px; font-size: 14px;">2</span>
+                    <small class="text-muted">Experience</small>
+                </div>
+                <div style="width: 60px; height: 2px; background: #dee2e6; margin-bottom: 20px;"></div>
+                <div class="d-flex flex-column align-items-center">
+                    <span class="badge bg-secondary rounded-circle mb-1" style="width: 35px; height: 35px; line-height: 25px; font-size: 14px;">3</span>
+                    <small class="text-muted">Skills</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form method="post" action="/Applicant/CreateProfile" enctype="multipart/form-data">
+            <!-- Experience Level -->
+            <div class="mb-4 p-4 bg-light rounded-3">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-briefcase me-2"></i>Experience Level</h5>
+                
+                <div class="mb-3">
+                    <label for="experienceLevel" class="form-label fw-semibold">Select Your Experience Level <span class="text-danger">*</span></label>
+                    <select class="form-select form-select-lg" id="experienceLevel" name="experienceLevel" required>
+                        <option value="">Choose your experience level</option>
+                        <option value="Entry Level">Entry Level (0-2 years)</option>
+                        <option value="Mid Level">Mid Level (3-5 years)</option>
+                        <option value="Senior Level">Senior Level (5-10 years)</option>
+                        <option value="Expert">Expert (10+ years)</option>
+                    </select>
+                    <small class="text-muted"><i class="fa-solid fa-info-circle me-1"></i>This helps match you with appropriate job opportunities</small>
+                </div>
+            </div>
+
+            <!-- Preferred Job Type -->
+            <div class="mb-4 p-4 bg-light rounded-3">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-sliders me-2"></i>Job Preferences</h5>
+                
+                <div class="mb-3">
+                    <label for="preferredJobType" class="form-label fw-semibold">Preferred Job Type <span class="text-danger">*</span></label>
+                    <select class="form-select form-select-lg" id="preferredJobType" name="PreferredJobType" required>
+                        <option value="">Select preferred job type</option>
+                        <option value="Full-time">💼 Full-time</option>
+                        <option value="Part-time">⏰ Part-time</option>
+                        <option value="Contract">📋 Contract</option>
+                        <option value="Internship">🎓 Internship</option>
+                    </select>
+                    <small class="text-muted">Choose the employment type you prefer</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="workArrangementPreference" class="form-label fw-semibold">Work Arrangement <span class="text-danger">*</span></label>
+                    <select class="form-select form-select-lg" id="workArrangementPreference" name="WorkArrangementPreference" required>
+                        <option value="">Select preferred work arrangement</option>
+                        <option value="Remote">💻 Remote</option>
+                        <option value="Hybrid">🔄 Hybrid</option>
+                        <option value="Onsite">🏢 Onsite</option>
+                        <option value="Any">🌍 Any (Flexible)</option>
+                    </select>
+                    <small class="text-muted">Choose the work arrangement that suits you best</small>
+                </div>
+            </div>
+
+            <!-- Resume Upload -->
+            <div class="mb-4 p-4 bg-light rounded-3">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-file-pdf me-2"></i>Resume/CV</h5>
+                
+                <div class="alert alert-warning border-0 mb-3">
+                    <i class="fa-solid fa-star me-2"></i><strong>Pro Tip:</strong> Profiles with resumes get 3x more responses!
+                </div>
+
+                <div class="mb-3">
+                    <label for="resumeUrl" class="form-label fw-semibold">Resume/CV URL <span class="text-danger">*</span></label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+                        <input type="url" class="form-control" id="resumeUrl" name="resumeUrl" placeholder="https://drive.google.com/your-cv-link" required />
+                    </div>
+                    <small class="text-muted"><i class="fa-solid fa-cloud me-1"></i>Paste a link to your resume on Google Drive, Dropbox, LinkedIn, or your portfolio website</small>
+                </div>
+
+                <div class="alert alert-info border-0 mt-3">
+                    <strong><i class="fa-solid fa-circle-info me-2"></i>How to get your CV URL:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li><strong>Google Drive:</strong> Upload → Right-click → Get link → Copy link</li>
+                        <li><strong>Dropbox:</strong> Upload → Share → Create link → Copy link</li>
+                        <li><strong>LinkedIn:</strong> Profile → Featured → Add media → Copy link</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="mb-4 p-4 bg-light rounded-3">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-star me-2"></i>Top Skills</h5>
+                <div class="mb-3">
+                    <label for="skills" class="form-label fw-semibold">Add Your Skills</label>
+                    <input type="text" class="form-control form-control-lg" id="skills" name="skills" placeholder="e.g., JavaScript, React, Node.js, Python, SQL" />
+                    <small class="text-muted"><i class="fa-solid fa-info-circle me-1"></i>Separate skills with commas. Add 5-10 relevant skills</small>
+                </div>
+                
+                <!-- Suggested Skills -->
+                <div class="mt-3">
+                    <small class="text-muted fw-semibold d-block mb-2">Popular Skills:</small>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('JavaScript')">JavaScript</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('Python')">Python</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('React')">React</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('Node.js')">Node.js</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('SQL')">SQL</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('AWS')">AWS</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('Docker')">Docker</span>
+                        <span class="badge bg-primary" style="cursor: pointer;" onclick="addSkill('Git')">Git</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-3 mt-4">
+                <a href="/Applicant/Dashboard" class="btn btn-outline-secondary btn-lg flex-fill">
+                    <i class="fa-solid fa-times me-2"></i> Skip for Now
+                </a>
+                <button type="submit" class="btn btn-primary btn-lg flex-fill shadow">
+                    <i class="fa-solid fa-check me-2"></i> Complete Profile
+                </button>
+            </div>
+        </form>
+
+        <!-- Help Text -->
+        <div class="text-center mt-4">
+            <div class="alert alert-light border mb-0">
+                <i class="fa-solid fa-shield-halved text-success me-2"></i>
+                <small class="text-muted">Your information is secure and will only be shared with potential employers when you apply</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.upload-area:hover {
+    background-color: #f8f9fa;
+    border-color: #2563eb !important;
+}
+
+.profile-icon-wrapper {
+    animation: pulse 2s infinite;
+}
+
+@@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+</style>
+
+<script>
+    function updateFileName(input) {
+        const fileName = input.files[0]?.name;
+        if (fileName) {
+            document.getElementById('fileName').textContent = '✓ ' + fileName;
+        }
+    }
+
+    function addSkill(skill) {
+        const skillsInput = document.getElementById('skills');
+        const currentSkills = skillsInput.value;
+        
+        if (currentSkills.includes(skill)) {
+            return; // Skill already added
+        }
+        
+        if (currentSkills) {
+            skillsInput.value = currentSkills + ', ' + skill;
+        } else {
+            skillsInput.value = skill;
+        }
+    }
+</script>

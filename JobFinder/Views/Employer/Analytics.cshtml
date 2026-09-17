@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Analytics | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="back-home-btn">
+    <a href="/Employer/Dashboard" class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard
+    </a>
+</div>
+
+<section class="bg-gradient text-white py-5">
+    <div class="container">
+        <h1 class="fw-bold mb-2"><i class="fa-solid fa-chart-line me-2"></i>Analytics Dashboard</h1>
+        <p class="lead mb-0">Track your hiring performance and metrics</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <!-- Key Metrics -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-4">
+                    <h3 class="fw-bold text-primary">1,247</h3>
+                    <p class="text-muted mb-0">Total Views</p>
+                    <small class="text-success"><i class="fa-solid fa-arrow-up me-1"></i>+15%</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-4">
+                    <h3 class="fw-bold text-success">342</h3>
+                    <p class="text-muted mb-0">Applications</p>
+                    <small class="text-success"><i class="fa-solid fa-arrow-up me-1"></i>+22%</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-4">
+                    <h3 class="fw-bold text-warning">27.4%</h3>
+                    <p class="text-muted mb-0">Conversion Rate</p>
+                    <small class="text-success"><i class="fa-solid fa-arrow-up me-1"></i>+5%</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm text-center p-4">
+                    <h3 class="fw-bold text-info">14 days</h3>
+                    <p class="text-muted mb-0">Avg. Time to Hire</p>
+                    <small class="text-success"><i class="fa-solid fa-arrow-down me-1"></i>-3 days</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row g-4 mb-5">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-4">Applications Over Time</h5>
+                        <div class="bg-light rounded p-5 text-center">
+                            <i class="fa-solid fa-chart-line fa-4x text-muted mb-3"></i>
+                            <p class="text-muted">Chart visualization would appear here</p>
+                            <small class="text-muted">Integrate with Chart.js or similar library</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-4">Top Sources</h5>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Direct</span>
+                                <span class="fw-bold">45%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>LinkedIn</span>
+                                <span class="fw-bold">30%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Indeed</span>
+                                <span class="fw-bold">15%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: 15%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Other</span>
+                                <span class="fw-bold">10%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-secondary" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Table -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Job Performance</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Views</th>
+                                <th>Applications</th>
+                                <th>Conversion</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-semibold">Senior Software Engineer</td>
+                                <td>487</td>
+                                <td>47</td>
+                                <td><span class="badge bg-success">9.6%</span></td>
+                                <td><span class="badge bg-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">Frontend Developer</td>
+                                <td>356</td>
+                                <td>32</td>
+                                <td><span class="badge bg-success">9.0%</span></td>
+                                <td><span class="badge bg-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold">Product Manager</td>
+                                <td>298</td>
+                                <td>28</td>
+                                <td><span class="badge bg-warning text-dark">9.4%</span></td>
+                                <td><span class="badge bg-success">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.back-home-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.back-home-btn.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+</style>
+
+<script>
+    // Fade out back button on scroll
+    window.addEventListener('scroll', function() {
+        const backBtn = document.querySelector('.back-home-btn');
+        const scrollPosition = window.scrollY;
+        
+        // Start fading after 100px scroll
+        if (scrollPosition > 100) {
+            backBtn.classList.add('fade-out');
+        } else {
+            backBtn.classList.remove('fade-out');
+        }
+    });
+</script>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

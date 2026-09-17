@@ -1,0 +1,559 @@
+﻿@{
+    ViewBag.Title = "HireSphere | Intelligent Job Matching Platform";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ========================= SLIDER CONTAINER ========================= -->
+<div id="hireSphereSlider" class="slider-container">
+
+    <!-- SLIDE 1: HERO / WELCOME -->
+    <section class="slide hero-slide d-flex align-items-center text-center text-white">
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-3 animate-fade">Welcome to <span class="text-accent">HireSphere</span></h1>
+            <p class="lead mb-4 animate-fade">Intelligently linking employers to applicants through <strong>AI recommendations</strong> and <strong>rule-based logic</strong></p>
+            <div class="d-flex justify-content-center gap-3 animate-fade">
+                <a href="/Account/Login?role=Employer" class="btn btn-light btn-lg fw-semibold">
+                    <i class="fa-solid fa-briefcase me-2"></i> I'm an Employer
+                </a>
+                <a href="/Account/Login?role=Applicant" class="btn btn-outline-light btn-lg">
+                    <i class="fa-solid fa-user-tie me-2"></i> I'm an Applicant
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: HOW IT WORKS - OVERVIEW -->
+    <section class="slide d-flex align-items-center bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h2 class="fw-bold text-primary mb-4"><i class="fa-solid fa-circle-nodes me-2"></i>How HireSphere Works</h2>
+                    <p class="text-muted fs-5 mb-4">
+                        HireSphere combines cutting-edge <strong>artificial intelligence</strong> with proven <strong>rule-based matching logic</strong> 
+                        to create the perfect connection between employers and job seekers.
+                    </p>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-check-circle fa-2x text-success me-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Smart Matching</h5>
+                            <p class="text-muted">AI analyzes skills, experience, and preferences</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-check-circle fa-2x text-success me-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Rule-Based Filtering</h5>
+                            <p class="text-muted">Precise criteria matching for qualifications and requirements</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-check-circle fa-2x text-success me-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Continuous Learning</h5>
+                            <p class="text-muted">System improves with every interaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="~/images/ai-matching.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/260312/screenshots/17973155/media/efb9b0124f3cc9f15492f0b5ce0283a8.gif';"
+                         alt="AI Matching Process" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: AI RECOMMENDATION ENGINE -->
+    <section class="slide d-flex align-items-center bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center mb-4 mb-md-0">
+                    <img src="~/images/ai-engine.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/260312/screenshots/18016384/media/65eea1711d270ba8a93f7b8b5052dbf2.gif';"
+                         alt="AI Engine" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="fw-bold text-primary mb-4"><i class="fa-solid fa-robot me-2"></i>AI Recommendation System</h2>
+                    <p class="text-muted fs-5 mb-4">
+                        Our advanced AI engine uses machine learning algorithms to understand both employer needs and candidate capabilities.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fa-solid fa-brain text-primary me-2"></i>
+                            <strong>Natural Language Processing:</strong> Analyzes job descriptions and resumes
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa-solid fa-chart-line text-primary me-2"></i>
+                            <strong>Predictive Analytics:</strong> Forecasts candidate-job compatibility
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa-solid fa-network-wired text-primary me-2"></i>
+                            <strong>Neural Matching:</strong> Identifies hidden skill correlations
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa-solid fa-lightbulb text-primary me-2"></i>
+                            <strong>Smart Recommendations:</strong> Suggests optimal matches in real-time
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: RULE-BASED LOGIC -->
+    <section class="slide d-flex align-items-center bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h2 class="fw-bold text-primary mb-4"><i class="fa-solid fa-gears me-2"></i>Rule-Based Matching Logic</h2>
+                    <p class="text-muted fs-5 mb-4">
+                        Complementing our AI, rule-based logic ensures precise matching based on specific, measurable criteria.
+                    </p>
+                    <div class="card border-0 shadow-sm mb-3 p-3">
+                        <h6 class="fw-bold text-success"><i class="fa-solid fa-filter me-2"></i>Hard Requirements</h6>
+                        <p class="text-muted small mb-0">Education level, certifications, years of experience</p>
+                    </div>
+                    <div class="card border-0 shadow-sm mb-3 p-3">
+                        <h6 class="fw-bold text-info"><i class="fa-solid fa-sliders me-2"></i>Soft Preferences</h6>
+                        <p class="text-muted small mb-0">Location, salary range, work arrangement</p>
+                    </div>
+                    <div class="card border-0 shadow-sm mb-3 p-3">
+                        <h6 class="fw-bold text-warning"><i class="fa-solid fa-code-branch me-2"></i>Conditional Logic</h6>
+                        <p class="text-muted small mb-0">If-then rules for complex matching scenarios</p>
+                    </div>
+                    <div class="card border-0 shadow-sm p-3">
+                        <h6 class="fw-bold text-danger"><i class="fa-solid fa-shield-halved me-2"></i>Compliance Checks</h6>
+                        <p class="text-muted small mb-0">Legal requirements and industry regulations</p>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="~/images/rule-based.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/userupload/12395027/file/original-8af8e41d38a76e4e3ad4b502a54e74e4.gif';"
+                         alt="Rule-Based Logic" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: THE MATCHING PROCESS -->
+    <section class="slide d-flex align-items-center bg-white">
+        <div class="container text-center">
+            <h2 class="fw-bold text-primary mb-5"><i class="fa-solid fa-diagram-project me-2"></i>The Intelligent Matching Process</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="process-card card border-0 shadow-sm p-4 h-100">
+                        <div class="process-number bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 60px; height: 60px;">
+                            <span class="fs-4 fw-bold">1</span>
+                        </div>
+                        <h5 class="fw-bold">Data Collection</h5>
+                        <p class="text-muted small">Employers post jobs, applicants create profiles with skills and preferences</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="process-card card border-0 shadow-sm p-4 h-100">
+                        <div class="process-number bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 60px; height: 60px;">
+                            <span class="fs-4 fw-bold">2</span>
+                        </div>
+                        <h5 class="fw-bold">AI Analysis</h5>
+                        <p class="text-muted small">Machine learning algorithms process and understand requirements and capabilities</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="process-card card border-0 shadow-sm p-4 h-100">
+                        <div class="process-number bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 60px; height: 60px;">
+                            <span class="fs-4 fw-bold">3</span>
+                        </div>
+                        <h5 class="fw-bold">Rule Filtering</h5>
+                        <p class="text-muted small">Apply hard requirements and conditional logic to narrow matches</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="process-card card border-0 shadow-sm p-4 h-100">
+                        <div class="process-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
+                             style="width: 60px; height: 60px;">
+                            <span class="fs-4 fw-bold">4</span>
+                        </div>
+                        <h5 class="fw-bold">Smart Matching</h5>
+                        <p class="text-muted small">Deliver ranked recommendations to both employers and applicants</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <img src="~/images/matching-process.svg" 
+                     onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/722835/screenshots/15346094/media/5c9a692b6220f63b5f94c0a940ce6e29.gif';"
+                     alt="Matching Process Flow" class="img-fluid rounded-4 shadow-lg" style="max-width: 600px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: BENEFITS -->
+    <section class="slide d-flex align-items-center bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-primary text-center mb-5"><i class="fa-solid fa-star me-2"></i>Why Choose HireSphere?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 text-center h-100 hover-lift">
+                        <i class="fa-solid fa-clock fa-3x text-primary mb-3"></i>
+                        <h5 class="fw-bold">Save Time</h5>
+                        <p class="text-muted">Reduce hiring time by 70% with automated intelligent matching</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 text-center h-100 hover-lift">
+                        <i class="fa-solid fa-bullseye fa-3x text-success mb-3"></i>
+                        <h5 class="fw-bold">Better Matches</h5>
+                        <p class="text-muted">95% match accuracy combining AI and rule-based logic</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 text-center h-100 hover-lift">
+                        <i class="fa-solid fa-chart-simple fa-3x text-info mb-3"></i>
+                        <h5 class="fw-bold">Data-Driven</h5>
+                        <p class="text-muted">Make informed decisions with comprehensive analytics</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 text-center h-100 hover-lift">
+                        <i class="fa-solid fa-shield-halved fa-3x text-warning mb-3"></i>
+                        <h5 class="fw-bold">Fair & Unbiased</h5>
+                        <p class="text-muted">AI-powered matching reduces unconscious bias</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 text-center h-100 hover-lift">
+                        <i class="fa-solid fa-rocket fa-3x text-danger mb-3"></i>
+                        <h5 class="fw-bold">Scalable</h5>
+                        <p class="text-muted">Handle thousands of matches simultaneously</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 text-center h-100 hover-lift">
+                        <i class="fa-solid fa-users fa-3x text-purple mb-3"></i>
+                        <h5 class="fw-bold">User-Friendly</h5>
+                        <p class="text-muted">Intuitive interface for both employers and applicants</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: GET STARTED -->
+    <section class="slide d-flex align-items-center text-center text-white bg-gradient">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Ready to Get Started?</h1>
+            <p class="lead mb-5">Join thousands of employers and applicants finding their perfect match</p>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-5">
+                    <div class="card border-0 shadow-lg p-4 text-dark">
+                        <i class="fa-solid fa-briefcase fa-4x text-primary mb-3"></i>
+                        <h3 class="fw-bold mb-3">For Employers</h3>
+                        <p class="text-muted mb-4">Post jobs and find qualified candidates instantly</p>
+                        <a href="/Employer/Index" class="btn btn-primary btn-lg fw-semibold w-100">
+                            <i class="fa-solid fa-arrow-right me-2"></i> Employer Portal
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card border-0 shadow-lg p-4 text-dark">
+                        <i class="fa-solid fa-user-tie fa-4x text-success mb-3"></i>
+                        <h3 class="fw-bold mb-3">For Applicants</h3>
+                        <p class="text-muted mb-4">Discover opportunities tailored to your skills</p>
+                        <a href="/Applicant/Index" class="btn btn-success btn-lg fw-semibold w-100">
+                            <i class="fa-solid fa-arrow-right me-2"></i> Applicant Portal
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <p class="text-white-50">Already have an account? <a href="/Account/Login" class="text-white fw-bold text-decoration-underline">Login here</a></p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- SLIDER NAV DOTS -->
+<div class="slider-dots text-center">
+    <span class="dot active" data-index="0"></span>
+    <span class="dot" data-index="1"></span>
+    <span class="dot" data-index="2"></span>
+    <span class="dot" data-index="3"></span>
+    <span class="dot" data-index="4"></span>
+    <span class="dot" data-index="5"></span>
+    <span class="dot" data-index="6"></span>
+</div>
+
+<!-- NAVIGATION ARROWS -->
+<button class="slider-nav prev" onclick="navigateSlide(-1)">
+    <i class="fa-solid fa-chevron-left"></i>
+</button>
+<button class="slider-nav next" onclick="navigateSlide(1)">
+    <i class="fa-solid fa-chevron-right"></i>
+</button>
+
+@section Scripts {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+    let current = 0;
+    let autoPlayInterval;
+
+    const showSlide = (index) => {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        
+        slides.forEach((s, i) => s.style.transform = `translateX(${(i - index) * 100}%)`);
+        dots.forEach(d => d.classList.remove("active"));
+        dots[index].classList.add("active");
+        current = index;
+    };
+
+    window.navigateSlide = (direction) => {
+        showSlide(current + direction);
+        resetAutoPlay();
+    };
+
+    const resetAutoPlay = () => {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(() => showSlide((current + 1) % slides.length), 8000);
+    };
+
+    dots.forEach(dot => dot.addEventListener("click", () => {
+        showSlide(parseInt(dot.dataset.index));
+        resetAutoPlay();
+    }));
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") navigateSlide(-1);
+        if (e.key === "ArrowRight") navigateSlide(1);
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.querySelector('.slider-container').addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.querySelector('.slider-container').addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) navigateSlide(1);
+        if (touchEndX - touchStartX > 50) navigateSlide(-1);
+    });
+
+    autoPlayInterval = setInterval(() => showSlide((current + 1) % slides.length), 8000);
+    showSlide(current);
+
+    // Hover effects for cards
+    document.querySelectorAll('.hover-lift').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Process cards animation on scroll
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.process-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
+});
+</script>
+
+<style>
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: transform 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+.hero-slide {
+    background: linear-gradient(135deg, #2563eb, #22c1c3);
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+.text-accent { color: #ffeb3b; }
+.text-gradient {
+    background: linear-gradient(90deg, #2563eb, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.text-purple { color: #6610f2; }
+
+/* Slider Navigation */
+.slider-dots {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 100;
+}
+.dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 0 6px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(37, 99, 235, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.dot.active { 
+    background-color: #2563eb; 
+    transform: scale(1.3);
+    border-color: #2563eb;
+}
+.dot:hover { 
+    background-color: #2563eb; 
+    transform: scale(1.2);
+}
+
+/* Navigation Arrows */
+.slider-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(37, 99, 235, 0.8);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+.slider-nav:hover {
+    background: rgba(37, 99, 235, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+.slider-nav.prev { left: 20px; }
+.slider-nav.next { right: 20px; }
+
+/* Interactive Elements */
+.hover-lift {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+}
+
+.process-card {
+    transition: all 0.6s ease;
+}
+.process-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2);
+}
+
+.process-number {
+    transition: all 0.3s ease;
+}
+.process-card:hover .process-number {
+    transform: rotate(360deg);
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+.animate-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s ease forwards;
+}
+@@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Hover Effects */
+.card {
+    transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@@media (max-width: 768px) {
+    .slider-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .slider-nav.prev { left: 10px; }
+    .slider-nav.next { right: 10px; }
+    
+    .slide {
+        padding: 1rem;
+    }
+    
+    .display-3 {
+        font-size: 2rem !important;
+    }
+    
+    .display-4 {
+        font-size: 1.8rem !important;
+    }
+}
+</style>
+}

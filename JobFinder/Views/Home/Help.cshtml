@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "Help Centre | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold text-primary">Help Centre</h1>
+            <p class="text-muted">Find answers, explore FAQs, or chat with our AI assistant <strong>Sphere 🤖</strong>.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- FAQ Card -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-question-circle fa-3x text-info mb-3"></i>
+                        <h5 class="fw-bold">FAQs</h5>
+                        <p class="text-muted">Browse through frequently asked questions about job applications and hiring.</p>
+                        <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#faqModal">View FAQs</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Support Card -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-envelope-open-text fa-3x text-success mb-3"></i>
+                        <h5 class="fw-bold">Contact Support</h5>
+                        <p class="text-muted">Need more help? Contact our support team for assistance with your account.</p>
+                        <a href="mailto:support@hiresphere.com" class="btn btn-outline-success btn-sm">Email Support</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat with Sphere Card -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-robot fa-3x text-primary mb-3"></i>
+                        <h5 class="fw-bold">Chat with Sphere</h5>
+                        <p class="text-muted">Talk to our AI assistant for quick answers and guided job recommendations.</p>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#chatModal">Chat Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================
+     FAQ MODAL
+=============================== -->
+<div class="modal fade" id="faqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="faqModalLabel">Frequently Asked Questions</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="faq-section"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ==============================
+     CHAT MODAL
+=============================== -->
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="chatModalLabel">Chat with Sphere 🤖</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="chat-box" class="border rounded p-3 mb-3" style="height:300px; overflow-y:auto; background:#f9f9f9;"></div>
+                <div class="input-group">
+                    <input id="userInput" class="form-control" placeholder="Type your message..." />
+                    <button onclick="sendMessage()" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==============================
+     JAVASCRIPT SECTION
+=============================== -->
+<script>
+// 1️⃣ FAQs
+const faqs = [
+    { 
+        question: "How do I reset my password?", 
+        answer: "To reset your password, navigate to the login page and click on the 'Forgot Password?' link located below the login button. Enter your registered email address, and we'll send you a secure password reset link within minutes. Click the link in the email to create a new password. If you don't receive the email, check your spam folder or contact our support team at support@hiresphere.com for assistance."
+    },
+    { 
+        question: "Can I update my profile?", 
+        answer: "Yes, you can update your profile at any time! Simply log in to your account and navigate to your dashboard. Click on the 'Profile' or 'Edit Profile' button to access your profile settings. Here you can update your personal information, work experience, education, skills, upload a new resume, change your profile photo, and adjust your job preferences. Remember to click 'Save Changes' when you're done to ensure all updates are stored."
+    },
+    { 
+        question: "How can I contact support?", 
+        answer: "We offer multiple ways to get in touch with our support team. You can email us directly at support@hiresphere.com for detailed inquiries, use the 'Contact Support' button in the Help Centre, or chat with our AI assistant Sphere for instant answers to common questions. Our support team typically responds to emails within 24 hours during business days. For urgent matters, we recommend using the chat feature for immediate assistance."
+    },
+    { 
+        question: "Is HireSphere free to use?", 
+        answer: "Yes, HireSphere is completely free to use for both job seekers and employers! You can create an account, browse unlimited job listings, apply to positions, and use our AI-powered job matching features at no cost. Employers can post jobs, review applications, and communicate with candidates for free. We may introduce optional premium features in the future for advanced analytics and priority support, but all core functionality will remain free forever."
+    },
+    { 
+        question: "How does the AI job matching work?", 
+        answer: "Our AI-powered matching system analyzes your profile, skills, experience, and job preferences to recommend the most suitable positions for you. The algorithm considers factors like your work history, education, location preferences, salary expectations, and career goals. Each job recommendation comes with a match percentage (0-100%) indicating how well the position aligns with your profile. The more complete and detailed your profile is, the more accurate the AI recommendations become over time."
+    },
+    { 
+        question: "How do I apply for a job?", 
+        answer: "Applying for jobs on HireSphere is simple and straightforward. First, browse available positions using the search filters or view AI-recommended jobs on your dashboard. When you find a job you're interested in, click on it to view full details. Review the job description, requirements, and company information carefully. If it's a good fit, click the 'Apply' button. Your profile information and uploaded resume will be automatically sent to the employer. You can track all your applications in your dashboard and receive notifications about status updates."
+    },
+    { 
+        question: "Can employers see my profile before I apply?", 
+        answer: "No, employers cannot see your full profile or contact information unless you apply to their job posting. Your privacy is important to us. Employers can only see basic, anonymized data like your skills and experience level in aggregate statistics. Once you submit an application, the employer will have access to your complete profile, resume, and contact information. You have full control over which jobs you apply to and which employers can view your information."
+    },
+    { 
+        question: "How long does it take to hear back from employers?", 
+        answer: "Response times vary by employer, but most companies review applications within 5-10 business days. You'll receive email notifications whenever there's an update on your application status (under review, shortlisted, interview scheduled, etc.). Some employers respond within 24-48 hours, especially for urgent positions. If you haven't heard back after two weeks, you can send a polite follow-up message through our messaging system. Remember that high-quality applications with complete profiles typically receive faster responses."
+    },
+    { 
+        question: "What should I include in my profile?", 
+        answer: "A complete profile significantly increases your chances of getting hired. Include a professional profile photo, detailed work experience with specific achievements and responsibilities, education history with degrees and certifications, a comprehensive list of technical and soft skills, and an up-to-date resume in PDF format. Add a compelling professional summary that highlights your strengths and career goals. The more detailed and accurate your profile, the better our AI can match you with relevant opportunities and the more attractive you appear to potential employers."
+    },
+    { 
+        question: "How do I delete my account?", 
+        answer: "If you wish to delete your HireSphere account, log in and navigate to Settings from your dashboard. Scroll down to the 'Account Management' section and click on 'Delete Account'. You'll be asked to confirm this action as it's permanent and cannot be undone. All your data, including profile information, applications, and messages, will be permanently removed from our system within 30 days. If you're experiencing issues or have concerns, please contact our support team first – we're here to help and may be able to resolve your concerns without account deletion."
+    }
+];
+
+const faqContainer = document.getElementById("faq-section");
+faqContainer.innerHTML = faqs.map(faq => `
+    <div class="accordion mb-3">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${faq.question.replace(/\s+/g, '')}">
+                    ${faq.question}
+                </button>
+            </h2>
+            <div id="collapse${faq.question.replace(/\s+/g, '')}" class="accordion-collapse collapse">
+                <div class="accordion-body">${faq.answer}</div>
+            </div>
+        </div>
+    </div>
+`).join("");
+
+// 2️⃣ Chat with Sphere
+async function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chat-box");
+    const message = input.value.trim();
+    if (!message) return;
+
+    chatBox.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+    input.value = "";
+
+    const response = await fetch('/Help/ChatWithSphere', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userMessage: message })
+    });
+
+    const data = await response.json();
+    chatBox.innerHTML += `<div><strong>Sphere:</strong> ${data.reply}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "Post a Job | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Back to Dashboard Button -->
+<div class="back-home-btn">
+    <a href="/Employer/Dashboard" class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard
+    </a>
+</div>
+
+<!-- Header Section -->
+<section class="bg-gradient text-white py-3">
+    <div class="container">
+        <h1 class="fw-bold mb-2"><i class="fa-solid fa-plus-circle me-2"></i>Post a New Job</h1>
+        <p class="lead mb-0">Fill in the details below to attract the best candidates</p>
+    </div>
+</section>
+
+<!-- Job Posting Form -->
+<section class="py-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-4">
+                        <form method="post" action="/Employer/PostJob">
+                            <!-- Basic Information -->
+                            <h4 class="fw-bold text-primary mb-4"><i class="fa-solid fa-info-circle me-2"></i>Basic Information</h4>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-8">
+                                    <label for="jobTitle" class="form-label fw-semibold">Job Title <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="jobTitle" name="Title" 
+                                           placeholder="e.g., Senior Software Engineer" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="workArrangement" class="form-label fw-semibold">Work Arrangement <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="workArrangement" name="WorkArrangement" required>
+                                        <option value="">Select arrangement</option>
+                                        <option value="Onsite">🏢 Onsite</option>
+                                        <option value="Remote">💻 Remote</option>
+                                        <option value="Hybrid">🔄 Hybrid</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="location" class="form-label fw-semibold">Location <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="location" name="Location" 
+                                       placeholder="e.g., New York, NY or Remote" required>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="salaryMin" class="form-label fw-semibold">Minimum Salary ($)</label>
+                                    <input type="number" class="form-control" id="salaryMin" name="SalaryMin" 
+                                           placeholder="80000" min="0">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="salaryMax" class="form-label fw-semibold">Maximum Salary ($)</label>
+                                    <input type="number" class="form-control" id="salaryMax" name="SalaryMax" 
+                                           placeholder="120000" min="0">
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Job Description -->
+                            <h4 class="fw-bold text-primary mb-4"><i class="fa-solid fa-file-lines me-2"></i>Job Description</h4>
+                            
+                            <div class="mb-4">
+                                <label for="description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="description" name="Description" rows="6" 
+                                          placeholder="Describe the role, responsibilities, and what makes this position exciting..." required></textarea>
+                                <small class="text-muted">Be detailed to attract the right candidates</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="requirements" class="form-label fw-semibold">Requirements <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="requirements" name="Requirements" rows="5" 
+                                          placeholder="List the qualifications, skills, and experience needed..." required></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="responsibilities" class="form-label fw-semibold">Key Responsibilities</label>
+                                <textarea class="form-control" id="responsibilities" name="Responsibilities" rows="5" 
+                                          placeholder="What will the candidate be doing day-to-day?"></textarea>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Skills & Experience -->
+                            <h4 class="fw-bold text-primary mb-4"><i class="fa-solid fa-star me-2"></i>Skills & Experience</h4>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-8">
+                                    <label for="skills" class="form-label fw-semibold">Required Skills <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="skills" name="RequiredSkills" 
+                                           placeholder="e.g., JavaScript, React, Node.js (comma-separated)" required>
+                                    <small class="text-muted">Separate skills with commas</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="experienceYears" class="form-label fw-semibold">Years of Experience <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="experienceYears" name="ExperienceYears" 
+                                           placeholder="3" min="0" max="50" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="education" class="form-label fw-semibold">Education Level</label>
+                                <select class="form-select" id="education" name="Education">
+                                    <option value="">Select education level</option>
+                                    <option value="High School">High School</option>
+                                    <option value="Associate Degree">Associate Degree</option>
+                                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                    <option value="Master's Degree">Master's Degree</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="Not Required">Not Required</option>
+                                </select>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Additional Details -->
+                            <h4 class="fw-bold text-primary mb-4"><i class="fa-solid fa-cog me-2"></i>Additional Details</h4>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="closingDate" class="form-label fw-semibold">Application Deadline</label>
+                                    <input type="date" class="form-control" id="closingDate" name="ClosingDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label fw-semibold">Job Category</label>
+                                    <select class="form-select" id="category" name="Category">
+                                        <option value="">Select category</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Sales">Sales</option>
+                                        <option value="Design">Design</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Healthcare">Healthcare</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="benefits" class="form-label fw-semibold">Benefits & Perks</label>
+                                <textarea class="form-control" id="benefits" name="Benefits" rows="4" 
+                                          placeholder="Health insurance, 401k, flexible hours, remote work options..."></textarea>
+                            </div>
+
+                            <!-- AI Assistance Card -->
+                            <div class="alert alert-info border-0 shadow-sm mb-4">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa-solid fa-robot fa-2x text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="fw-bold mb-1">AI Recommendation</h6>
+                                        <p class="mb-0 small">Based on your job details, HireSphere AI will automatically match you with the most qualified candidates. The more detailed your description, the better the matches!</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="d-flex gap-3 justify-content-end">
+                                <a href="/Employer/Dashboard" class="btn btn-outline-secondary btn-lg">
+                                    <i class="fa-solid fa-times me-2"></i> Cancel
+                                </a>
+                                <button type="submit" name="status" value="Draft" class="btn btn-outline-primary btn-lg">
+                                    <i class="fa-solid fa-save me-2"></i> Save as Draft
+                                </button>
+                                <button type="submit" name="status" value="Active" class="btn btn-primary btn-lg shadow">
+                                    <i class="fa-solid fa-paper-plane me-2"></i> Post Job
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.back-home-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.back-home-btn.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+.form-label {
+    color: #333;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}
+</style>
+
+<script>
+    // Fade out back button on scroll
+    window.addEventListener('scroll', function() {
+        const backBtn = document.querySelector('.back-home-btn');
+        const scrollPosition = window.scrollY;
+        
+        // Start fading after 100px scroll
+        if (scrollPosition > 100) {
+            backBtn.classList.add('fade-out');
+        } else {
+            backBtn.classList.remove('fade-out');
+        }
+    });
+</script>

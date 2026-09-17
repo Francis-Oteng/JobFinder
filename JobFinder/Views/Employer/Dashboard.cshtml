@@ -1,0 +1,341 @@
+﻿@using Test.Models.ViewModels
+@model EmployerDashboardViewModel
+@{
+    ViewBag.Title = "Employer Dashboard | HireSphere";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ========================= HEADER / HERO SECTION ========================= -->
+<section class="dashboard-header bg-gradient text-white py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <h1 class="fw-bold mb-2">Welcome Back, @Model.EmployerName 👋</h1>
+                <p class="lead mb-0">Your all-in-one workspace to manage job posts, applicants, and AI-driven hiring insights.</p>
+                <small class="text-white-50">Last updated: @DateTime.Now.ToString("MMM dd, yyyy hh:mm tt")</small>
+            </div>
+            <div class="d-flex gap-2 mt-3 mt-md-0 flex-wrap">
+                <a href="/Employer/CreateProfile" class="btn btn-light fw-semibold shadow-sm">
+                    <i class="fa-solid fa-building-user me-2"></i> Complete Profile
+                </a>
+                <a href="/Employer/PostJob" class="btn btn-light fw-semibold shadow-sm">
+                    <i class="fa-solid fa-plus me-2"></i> Post a New Job
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= DASHBOARD STATS ========================= -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-fade">
+                    <div class="icon text-primary mb-2"><i class="fa-solid fa-briefcase fa-2x"></i></div>
+                    <h6 class="fw-bold">Total Jobs Posted</h6>
+                    <p class="text-primary mb-0 fs-3 fw-bold">@Model.Stats.TotalJobsPosted</p>
+                    <small class="text-muted">@Model.Stats.ActiveJobs active</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-fade">
+                    <div class="icon text-success mb-2"><i class="fa-solid fa-users fa-2x"></i></div>
+                    <h6 class="fw-bold">Total Applicants</h6>
+                    <p class="text-success mb-0 fs-3 fw-bold">@Model.Stats.TotalApplicants</p>
+                    <small class="text-muted">+@Model.Stats.NewApplicationsToday today</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-fade">
+                    <div class="icon text-warning mb-2"><i class="fa-solid fa-robot fa-2x"></i></div>
+                    <h6 class="fw-bold">AI Matches</h6>
+                    <p class="text-warning mb-0 fs-3 fw-bold">@Model.Stats.AIMatches</p>
+                    <small class="text-muted">High quality</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card border-0 shadow-sm text-center p-4 animate-fade">
+                    <div class="icon text-info mb-2"><i class="fa-solid fa-envelope-open-text fa-2x"></i></div>
+                    <h6 class="fw-bold">Unread Messages</h6>
+                    <p class="text-info mb-0 fs-3 fw-bold">@Model.Stats.UnreadMessages</p>
+                    <small class="text-muted">Requires attention</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="row g-3 mt-4">
+            <div class="col-md-3">
+                <a href="/Employer/CreateProfile" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm p-4 h-100 quick-action-card" style="border-left: 4px solid #0d6efd !important;">
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-user-circle fa-3x text-primary me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-dark">Complete Profile</h5>
+                                <p class="mb-0 small text-muted">Set up company info</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/Employer/PostJob" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm p-4 h-100 quick-action-card">
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-plus-circle fa-3x text-success me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-dark">Post New Job</h5>
+                                <p class="mb-0 small text-muted">Create a job listing</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/Employer/AIInsights" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm p-4 h-100 quick-action-card">
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-robot fa-3x text-warning me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-dark">AI Insights</h5>
+                                <p class="mb-0 small text-muted">View recommendations</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/Employer/Analytics" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm p-4 h-100 quick-action-card">
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-chart-bar fa-3x text-info me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-dark">Analytics</h5>
+                                <p class="mb-0 small text-muted">View performance</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= JOB MANAGEMENT PREVIEW ========================= -->
+<section class="py-5">
+    <div class="container">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate-slide">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-5">
+                    <img src="~/images/matching-process.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/722835/screenshots/15346094/media/5c9a692b6220f63b5f94c0a940ce6e29.gif';"
+                         alt="Job Management" class="img-fluid">
+                </div>
+                <div class="col-md-7 p-4">
+                    <h4 class="fw-bold text-primary mb-3"><i class="fa-solid fa-briefcase me-2"></i>Your Recent Job Listings</h4>
+                    <p class="text-muted mb-4">
+                        Keep track of all your job postings, manage openings, and monitor application activity — all from a single view.
+                    </p>
+                    @if (Model.RecentJobs.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Job Title</th>
+                                        <th>Location</th>
+                                        <th>Applicants</th>
+                                        <th>Status</th>
+                                        <th>Posted</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var job in Model.RecentJobs.Take(5))
+                                    {
+                                        <tr>
+                                            <td class="fw-semibold">@job.Title</td>
+                                            <td>@job.Location</td>
+                                            <td><span class="badge bg-info">@job.ApplicationCount</span></td>
+                                            <td>
+                                                @if (job.Status == "Active")
+                                                {
+                                                    <span class="badge bg-success">@job.Status</span>
+                                                }
+                                                else if (job.Status == "Closed")
+                                                {
+                                                    <span class="badge bg-secondary">@job.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning">@job.Status</span>
+                                                }
+                                            </td>
+                                            <td class="text-muted small">@job.PostedDate.ToString("MMM dd, yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info border-0">
+                            <i class="fa-solid fa-info-circle me-2"></i>
+                            You haven't posted any job openings yet. <a href="/Employer/PostJob" class="alert-link">Post your first job</a> to start receiving applications!
+                        </div>
+                    }
+                    <a href="/Employer/PostJob" class="btn btn-primary fw-semibold shadow-sm mt-3">
+                        <i class="fa-solid fa-plus me-1"></i> Post a Job
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= APPLICANT INSIGHTS ========================= -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate-fade">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-7 p-4">
+                    <h4 class="fw-bold text-primary mb-3"><i class="fa-solid fa-chart-line me-2"></i>Applicant Insights</h4>
+                    <p class="text-muted mb-4">
+                        View detailed analytics on applicant activity, response rates, and engagement trends.
+                        This dashboard section will soon include dynamic charts powered by HireSphere AI.
+                    </p>
+                    <div class="placeholder-chart bg-white border rounded text-center py-4 text-secondary">
+                        <i class="fa-solid fa-chart-column fa-2x mb-2 d-block"></i>
+                        <p class="mb-0">Analytics data not available yet.</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img src="~/images/analytics.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/userupload/10859072/file/original-7a11a3ee2c93d070da3487391c26e8ef.gif';"
+                         alt="Analytics Visualization" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= AI RECOMMENDATION / INSIGHTS ========================= -->
+<section class="py-5">
+    <div class="container">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate-slide">
+            <div class="row g-0 align-items-center">
+                <div class="col-md-5">
+                    <img src="~/images/ai-engine.svg" 
+                         onerror="this.onerror=null; this.src='https://cdn.dribbble.com/users/260312/screenshots/18016384/media/65eea1711d270ba8a93f7b8b5052dbf2.gif';"
+                         alt="AI Recommendations" class="img-fluid">
+                </div>
+                <div class="col-md-7 p-4">
+                    <h4 class="fw-bold text-primary mb-3"><i class="fa-solid fa-robot me-2"></i>Sphere AI Recommendations</h4>
+                    <p class="text-muted mb-4">
+                        HireSphere's intelligent engine analyzes market trends, applicant behavior, and job performance in real-time:
+                    </p>
+                    @if (Model.AIRecommendations.Any())
+                    {
+                        <div class="row g-3 mb-4">
+                            @foreach (var recommendation in Model.AIRecommendations)
+                            {
+                                <div class="col-12">
+                                    <div class="card border-start border-primary border-4 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-start">
+                                                <div class="me-3">
+                                                    <i class="fa-solid @recommendation.Icon fa-2x text-primary"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fw-bold mb-1">@recommendation.Title</h6>
+                                                    <p class="text-muted small mb-2">@recommendation.Description</p>
+                                                    <div class="progress" style="height: 6px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" 
+                                                             style="width: @recommendation.Score%" 
+                                                             aria-valuenow="@recommendation.Score" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <small class="text-muted">Confidence: @recommendation.Score%</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    <a href="/Employer/AIInsights" class="btn btn-outline-primary fw-semibold shadow-sm">
+                        <i class="fa-solid fa-robot me-1"></i> View Full AI Insights
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= CTA SECTION ========================= -->
+<section class="py-5 text-center bg-gradient text-white">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Stay Ahead with AI-Driven Hiring 🚀</h2>
+        <p class="lead mb-4">Let HireSphere streamline your recruitment process and bring you closer to the best candidates.</p>
+        <a href="/Employer/PostJob" class="btn btn-light btn-lg fw-semibold shadow-sm">
+            <i class="fa-solid fa-plus me-2"></i> Post a Job Now
+        </a>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.animate-fade, .animate-slide').forEach(el => {
+        el.classList.add('visible');
+    });
+});
+</script>
+
+<style>
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+
+/* Quick Action Cards */
+.quick-action-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.quick-action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.2) !important;
+}
+.quick-action-card i {
+    transition: transform 0.3s ease;
+}
+.quick-action-card:hover i {
+    transform: scale(1.1) rotate(5deg);
+}
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+}
+.animate-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease forwards;
+}
+.animate-slide {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 1s ease forwards;
+}
+@@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+@@keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+.visible { opacity: 1; transform: none; }
+img.img-fluid {
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+}

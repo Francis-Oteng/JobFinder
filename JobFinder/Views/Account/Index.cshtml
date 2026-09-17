@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "HireSphere | Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hero Section -->
+<section class="py-5 bg-light text-center">
+    <div class="container">
+        <h1 class="fw-bold display-5 text-primary">Welcome to <span class="text-gradient">HireSphere</span></h1>
+        <p class="lead text-muted mb-4">AI-powered connections between skilled applicants and visionary employers.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/Account/Login" class="btn btn-primary btn-lg px-4 shadow-sm">
+                <i class="fa-solid fa-right-to-bracket me-2"></i> Login
+            </a>
+            <a href="/Account/Register" class="btn btn-outline-primary btn-lg px-4 shadow-sm">
+                <i class="fa-solid fa-user-plus me-2"></i> Register
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body">
+                        <div class="text-primary mb-3"><i class="fa-solid fa-robot fa-2x"></i></div>
+                        <h5 class="card-title">AI Job Recommendations</h5>
+                        <p class="card-text text-muted">Discover the best roles tailored to your skills and experience automatically.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body">
+                        <div class="text-primary mb-3"><i class="fa-solid fa-briefcase fa-2x"></i></div>
+                        <h5 class="card-title">For Employers</h5>
+                        <p class="card-text text-muted">Post openings, review applicants, and get intelligent matches fast.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body">
+                        <div class="text-primary mb-3"><i class="fa-solid fa-user-tie fa-2x"></i></div>
+                        <h5 class="card-title">For Applicants</h5>
+                        <p class="card-text text-muted">Showcase your profile and stand out to recruiters looking for talent like you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 text-center bg-gradient position-relative overflow-hidden">
+    <div class="container">
+        <h2 class="fw-bold text-white">Ready to get started?</h2>
+        <p class="lead text-white-50 mb-4">Join the HireSphere network and elevate your hiring or career journey.</p>
+        <a href="/Account/Register" class="btn btn-light btn-lg fw-semibold shadow">
+            <i class="fa-solid fa-rocket me-2"></i> Create an Account
+        </a>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Small card hover animation
+        document.querySelectorAll('.hover-card').forEach(card => {
+            card.addEventListener('mouseenter', () => card.classList.add('shadow-lg'));
+            card.addEventListener('mouseleave', () => card.classList.remove('shadow-lg'));
+        });
+    </script>
+}
+
+<style>
+    .text-gradient {
+        background: linear-gradient(90deg, #0d6efd, #6610f2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .bg-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+    }
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+</style>

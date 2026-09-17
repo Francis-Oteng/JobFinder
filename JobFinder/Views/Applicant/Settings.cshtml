@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "Settings |     JobFinder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="back-home-btn">
+    <a href="/Applicant/Dashboard" class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard
+    </a>
+</div>
+
+<section class="bg-gradient text-white py-5">
+    <div class="container">
+        <h1 class="fw-bold mb-2"><i class="fa-solid fa-cog me-2"></i>Account Settings</h1>
+        <p class="lead mb-0">Manage your account preferences</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        <i class="fa-solid fa-user me-2"></i> Account
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-lock me-2"></i> Password
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-bell me-2"></i> Notifications
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-shield me-2"></i> Privacy
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-4">Account Information</h4>
+                        <form>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">First Name</label>
+                                    <input type="text" class="form-control" value="John">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Last Name</label>
+                                    <input type="text" class="form-control" value="Doe">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Email</label>
+                                <input type="email" class="form-control" value="john.doe@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Phone</label>
+                                <input type="tel" class="form-control" value="(555) 987-6543">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Location</label>
+                                <input type="text" class="form-control" value="San Francisco, CA">
+                            </div>
+
+                            <h5 class="fw-bold mb-3">Email Preferences</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="jobAlerts" checked>
+                                <label class="form-check-label" for="jobAlerts">
+                                    Job alerts and recommendations
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="appUpdates" checked>
+                                <label class="form-check-label" for="appUpdates">
+                                    Application status updates
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    Newsletter and career tips
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-save me-2"></i> Save Changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.back-home-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.back-home-btn.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.bg-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
+}
+</style>
+
+<script>
+    // Fade out back button on scroll
+    window.addEventListener('scroll', function() {
+        const backBtn = document.querySelector('.back-home-btn');
+        const scrollPosition = window.scrollY;
+        
+        // Start fading after 100px scroll
+        if (scrollPosition > 100) {
+            backBtn.classList.add('fade-out');
+        } else {
+            backBtn.classList.remove('fade-out');
+        }
+    });
+</script>

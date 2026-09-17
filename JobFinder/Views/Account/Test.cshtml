@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>Password Toggle Test</h2>
+    
+    <!-- Test 1: Basic Icon Display -->
+    <div class="mb-4">
+        <h4>Test 1: Font Awesome Icons</h4>
+        <i class="fa fa-eye"></i> Eye Icon
+        <i class="fa fa-eye-slash"></i> Eye Slash Icon
+    </div>
+    
+    <!-- Test 2: Input Group -->
+    <div class="mb-4" style="max-width: 400px;">
+        <h4>Test 2: Password Toggle</h4>
+        <div class="input-group">
+            <input type="password" id="testPassword" class="form-control" placeholder="Test password" />
+            <button class="btn btn-outline-secondary" type="button" id="testToggle">
+                <i id="testEye" class="fa fa-eye"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const pwd = document.getElementById('testPassword');
+        const btn = document.getElementById('testToggle');
+        const eye = document.getElementById('testEye');
+        
+        btn.addEventListener('click', () => {
+            const isPwd = pwd.type === 'password';
+            pwd.type = isPwd ? 'text' : 'password';
+            eye.classList.toggle('fa-eye');
+            eye.classList.toggle('fa-eye-slash');
+        });
+    });
+</script>

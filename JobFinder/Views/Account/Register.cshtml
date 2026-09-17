@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Register | HireSphere";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
+
+<div class="register-container d-flex align-items-center justify-content-center vh-100 bg-gradient position-relative">
+    <div class="register-card shadow-lg rounded-4 overflow-hidden d-flex flex-md-row flex-column">
+        
+        <!-- ===== LEFT PANEL: FORM ===== -->
+        <div class="form-section p-5 bg-white flex-fill">
+            <h2 class="fw-bold text-primary mb-2">Create Your Account 👤</h2>
+            <p class="text-muted mb-4">Join <strong>HireSphere</strong> to connect with top employers or skilled applicants.</p>
+
+            <!-- Progress bar -->
+            <div class="progress mb-4" style="height: 6px;">
+                <div class="progress-bar bg-primary" style="width: 100%;"></div>
+            </div>
+
+            <form method="post" action="/Account/Register">
+                @Html.AntiForgeryToken()
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                        <i class="fa-solid fa-exclamation-circle me-2"></i>@ViewBag.Error
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Full Name</label>
+                        <input type="text" name="fullName" class="form-control" placeholder="John Doe" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="you@example.com" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Password</label>
+                        <div class="input-group">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter a secure password" required />
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Re-enter password" required />
+                            <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">Show</button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">I want to register as</label>
+                        <select name="role" class="form-select" required>
+                            <option value="" disabled @@(string.IsNullOrEmpty(Context.Request.Query["role"]) ? "selected" : "")>Select your role</option>
+                            <option value="Applicant" @@(Context.Request.Query["role"] == "Applicant" ? "selected" : "")>🔍 Applicant – Looking for a job</option>
+                            <option value="Employer" @@(Context.Request.Query["role"] == "Employer" ? "selected" : "")>💼 Employer – Posting jobs</option>
+                        </select>
+                        <small class="text-muted">Choose carefully - this determines your dashboard access</small>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-grid">
+                    <button type="submit" class="btn btn-primary fw-semibold py-2">
+                        <i class="fa-solid fa-user-plus me-2"></i> Create Account
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <p class="small mb-0 text-muted">
+                    Already have an account?
+                    <a href="/Account/Login?role=@Context.Request.Query["role"]" class="text-decoration-none text-primary fw-semibold">Login here</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== RIGHT PANEL: HERO IMAGE ===== -->
+        <div class="illustration-section d-flex align-items-center justify-content-center p-4 flex-fill">
+            <div class="text-center">
+                <picture>
+                    <!-- Primary WebP -->
+                    <source type="image/webp"
+                            srcset="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&fm=webp&q=80" />
+                    <!-- JPG Fallback -->
+                    <source type="image/jpeg"
+                            srcset="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+                    <!-- Local Fallback -->
+                    <img src="~/images/register-illustration.jpg"
+                         alt="Create Account Illustration"
+                         class="img-fluid rounded-4 shadow-lg mb-3"
+                         style="max-height: 300px;"
+                         loading="lazy" />
+                </picture>
+                <h5 class="fw-bold text-primary mt-2">Start your journey with HireSphere</h5>
+                <p class="text-muted small">Empowering connections between employers and top talent worldwide 🌍</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FLOATING AI ASSISTANT ===== -->
+    <div class="ai-assistant" id="aiAssistantRegister" title="Click for help">
+        <div class="speech-bubble">
+            Hi, I'm <strong>Sphere 🤖</strong><br />
+            Need help registering?
+        </div>
+    </div>
+</div>
+
+<!-- ===== REGISTRATION HELP MODAL ===== -->
+<div class="modal fade" id="aiHelpModalRegister" tabindex="-1" aria-labelledby="aiHelpModalRegisterLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-robot me-2"></i> Registration Help</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <ul class="list-group list-group-flush small">
+                    <li class="list-group-item"><strong>1️⃣ Full Name:</strong> Enter your real name for your profile.</li>
+                    <li class="list-group-item"><strong>2️⃣ Email:</strong> Use a valid email — you’ll receive verification.</li>
+                    <li class="list-group-item"><strong>3️⃣ Password:</strong> Choose a strong password (8+ chars, include numbers).</li>
+                    <li class="list-group-item"><strong>4️⃣ Role Selection:</strong> Choose <b>Applicant</b> if job seeker or <b>Employer</b> if posting jobs.</li>
+                    <li class="list-group-item"><strong>5️⃣ Confirm Password:</strong> Re-enter your password carefully.</li>
+                </ul>
+
+                <div class="text-center mt-4">
+                    <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=800&q=80"
+                         alt="Assistant Help"
+                         class="img-fluid rounded-3 shadow-sm"
+                         style="max-height:200px;" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary fw-semibold" data-bs-dismiss="modal">Got it 👍</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SCRIPTS & STYLES ===== -->
+@section Scripts {
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const aiAssistant = document.getElementById("aiAssistantRegister");
+        aiAssistant.addEventListener("click", () => {
+            const modal = new bootstrap.Modal(document.getElementById("aiHelpModalRegister"));
+            modal.show();
+        });
+
+        // Password toggle
+        const password = document.getElementById("password");
+        const toggle = document.getElementById("togglePassword");
+
+        toggle.addEventListener("click", () => {
+            if (password.type === "password") {
+                password.type = "text";
+                toggle.textContent = "Hide";
+            } else {
+                password.type = "password";
+                toggle.textContent = "Show";
+            }
+        });
+
+        // Confirm password toggle
+        const confirmPassword = document.getElementById("confirmPassword");
+        const toggleConfirm = document.getElementById("toggleConfirmPassword");
+
+        toggleConfirm.addEventListener("click", () => {
+            if (confirmPassword.type === "password") {
+                confirmPassword.type = "text";
+                toggleConfirm.textContent = "Hide";
+            } else {
+                confirmPassword.type = "password";
+                toggleConfirm.textContent = "Show";
+            }
+        });
+    });
+</script>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #22c1c3, #2563eb);
+    }
+    .register-card {
+        max-width: 950px;
+        width: 95%;
+        background: white;
+    }
+    .illustration-section {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    }
+    .ai-assistant {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        z-index: 1050;
+        animation: floaty 3s ease-in-out infinite;
+    }
+    .speech-bubble {
+        background-color: #2563eb;
+        color: white;
+        padding: 14px 18px;
+        border-radius: 18px;
+        font-size: 14px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+    .speech-bubble:hover {
+        background-color: #1d4ed8;
+        transform: scale(1.05);
+    }
+    @@keyframes floaty {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+</style>
+}
