@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The following versions of the SwiftCart Food Delivery System are currently supported with security updates:
+The following versions of the JobFinder Food Delivery System are currently supported with security updates:
 
 | Version | Supported |
 | ------- | --------- |
