@@ -25,8 +25,8 @@ Create a fork of the repository on GitHub.
 
 **Clone your fork:**
 ```bash
-git clone https://github.com/<your-username>/EasyStay.git
-cd EasyStay
+git clone https://github.com/<Francis-Oteng>/JobFinder.git
+cd JobFinder
 ```
 
 #### 2. Create a new branch
