@@ -169,4 +169,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## Contact
 
-Questions or feedback? Open an issue or reach out at **team@JobFinder.example.com**.
+Questions or feedback? Open an issue or reach out at **team@JobFinder.@Gmail.com**.
