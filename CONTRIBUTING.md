@@ -77,7 +77,7 @@ Ensure you have the following installed:
 
 #### 1. Clone the repository
 ```bash
-git clone https://github.com/Francis-Oteng/EasyStay.git
+git clone https://github.com/Francis-Oteng/JobFinder.git
 cd EasyStay
 ```
 
