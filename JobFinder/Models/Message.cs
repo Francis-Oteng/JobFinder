@@ -7,9 +7,9 @@ namespace JobFinder.Models
 
         public int MessageId { get; set; }
 
-        public int SenderId { get; set; }
+        public string SenderId { get; set; } = null!;
 
-        public int RecipientId { get; set; }
+        public string RecipientId { get; set; } = null!;
 
         public string Content { get; set; } = null!;
 

@@ -47,4 +47,4 @@ namespace JobFinder.Models
         public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
     }
 }
-}
+
