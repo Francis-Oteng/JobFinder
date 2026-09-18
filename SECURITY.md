@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The following versions of the JobFinder Food Delivery System are currently supported with security updates:
+The following versions of the JobFinder Job matching system are currently supported with security updates:
 
 | Version | Supported |
 | ------- | --------- |
@@ -26,6 +26,6 @@ If you discover a security vulnerability, please follow the steps below to repor
 
 **Disclosure:** To protect our users, we request that you do not disclose the vulnerability publicly until we have released a fix and informed our users.
 
-Thank you for helping us keep the SwiftCart Food Delivery System secure.
+Thank you for helping us keep the JobFinder Job matching System secure.
 
 For any other security-related questions or concerns, please contact us at **francisoteng1.05@gmail.com**.
