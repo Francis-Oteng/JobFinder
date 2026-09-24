@@ -1,0 +1,321 @@
+﻿
+@model JobFinder.Models.ViewModels.ApplicantProfileViewModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4 p-md-5">
+
+                <!-- Page Header -->
+                <div class="text-center mb-4">
+                    <h3 class="card-title fw-bold">Edit Your Profile</h3>
+                    <p class="text-muted">
+                        Keep your profile up to date to improve your job matching.
+                    </p>
+                </div>
+
+                <!-- Success Message -->
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <!-- Edit Profile Form -->
+                <form asp-controller="Applicant"
+                      asp-action="EditProfile"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <!-- Validation Summary -->
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3">
+                    </div>
+
+                    <!-- Personal Information -->
+                    <h5 class="fw-bold mb-3">Personal Information</h5>
+
+                    <div class="row">
+
+                        <!-- Full Name -->
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FullName"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="FullName"
+                                   class="form-control"
+                                   placeholder="Enter your full name" />
+
+                            <span asp-validation-for="FullName"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Email"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control"
+                                   autocomplete="email"
+                                   placeholder="Enter your email address" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PhoneNumber"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="PhoneNumber"
+                                   class="form-control"
+                                   placeholder="e.g. 024 XXX XXXX" />
+
+                            <span asp-validation-for="PhoneNumber"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Location"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="Location"
+                                   class="form-control"
+                                   placeholder="e.g. Kumasi, Ghana" />
+
+                            <span asp-validation-for="Location"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <!-- Professional Information -->
+                    <h5 class="fw-bold mb-3">Professional Information</h5>
+
+                    <!-- Bio -->
+                    <div class="mb-3">
+                        <label asp-for="Bio"
+                               class="form-label">
+                        </label>
+
+                        <textarea asp-for="Bio"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Tell employers about yourself, your experience and career goals..."></textarea>
+
+                        <span asp-validation-for="Bio"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="mb-3">
+                        <label asp-for="Skills"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="Skills"
+                               class="form-control"
+                               placeholder="e.g. C#, ASP.NET Core, SQL, JavaScript" />
+
+                        <small class="text-muted">
+                            Separate multiple skills with commas.
+                        </small>
+
+                        <span asp-validation-for="Skills"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="mb-3">
+                        <label asp-for="Education"
+                               class="form-label">
+                        </label>
+
+                        <textarea asp-for="Education"
+                                  class="form-control"
+                                  rows="3"
+                                  placeholder="Enter your educational background"></textarea>
+
+                        <span asp-validation-for="Education"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="mb-3">
+                        <label asp-for="Certifications"
+                               class="form-label">
+                        </label>
+
+                        <textarea asp-for="Certifications"
+                                  class="form-control"
+                                  rows="3"
+                                  placeholder="List your professional certifications"></textarea>
+
+                        <span asp-validation-for="Certifications"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="row">
+
+                        <!-- Experience Level -->
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ExperienceLevel"
+                                   class="form-label">
+                            </label>
+
+                            <select asp-for="ExperienceLevel"
+                                    class="form-select"
+                                    asp-items="Html.GetEnumSelectList<JobFinder.Models.Enums.ExperienceLevel>()">
+                                <option value="">
+                                    Select experience level
+                                </option>
+                            </select>
+
+                            <span asp-validation-for="ExperienceLevel"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <!-- Experience Years -->
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ExperienceYears"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="ExperienceYears"
+                                   class="form-control"
+                                   type="number"
+                                   min="0"
+                                   max="60"
+                                   placeholder="e.g. 2" />
+
+                            <span asp-validation-for="ExperienceYears"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Preferred Job Type -->
+                    <div class="mb-3">
+                        <label asp-for="PreferredJobType"
+                               class="form-label">
+                        </label>
+
+                        <select asp-for="PreferredJobType"
+                                class="form-select"
+                                asp-items="Html.GetEnumSelectList<JobFinder.Models.Enums.JobType>()">
+                            <option value="">
+                                Select preferred job type
+                            </option>
+                        </select>
+
+                        <span asp-validation-for="PreferredJobType"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <!-- Online Profiles -->
+                    <h5 class="fw-bold mb-3">Online Profiles</h5>
+
+                    <!-- Resume -->
+                    <div class="mb-3">
+                        <label asp-for="ResumeUrl"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="ResumeUrl"
+                               class="form-control"
+                               type="url"
+                               placeholder="https://example.com/resume" />
+
+                        <span asp-validation-for="ResumeUrl"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Portfolio -->
+                    <div class="mb-3">
+                        <label asp-for="PortfolioUrl"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="PortfolioUrl"
+                               class="form-control"
+                               type="url"
+                               placeholder="https://example.com/portfolio" />
+
+                        <span asp-validation-for="PortfolioUrl"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Profile Photo -->
+                    <div class="mb-3">
+                        <label asp-for="PhotoUrl"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="PhotoUrl"
+                               class="form-control"
+                               type="url"
+                               placeholder="https://example.com/photo.jpg" />
+
+                        <span asp-validation-for="PhotoUrl"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-2 mt-4">
+
+                        <a asp-controller="Applicant"
+                           asp-action="Dashboard"
+                           class="btn btn-outline-secondary flex-fill">
+                            Cancel
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-primary flex-fill">
+                            <i class="fa-solid fa-floppy-disk me-2"></i>
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

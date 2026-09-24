@@ -1,5 +1,381 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model JobFinder.Models.ViewModels.ApplicantJobsViewModel
+
 @{
+    ViewData["Title"] = "Available Jobs";
 }
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">
+                Available Job Opportunities
+            </h2>
+
+            <p class="text-muted mb-0">
+                Find jobs that match your skills and career goals.
+            </p>
+        </div>
+
+        <a asp-controller="Applicant"
+           asp-action="Dashboard"
+           class="btn btn-outline-secondary">
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Success / Error Messages -->
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show"
+             role="alert">
+
+            @TempData["SuccessMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show"
+             role="alert">
+
+            @TempData["ErrorMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+
+    <!-- Search / Filters -->
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <form asp-controller="Applicant"
+                  asp-action="Jobs"
+                  method="get">
+
+                <div class="row g-3">
+
+                    <!-- Search -->
+
+                    <div class="col-lg-4">
+
+                        <label asp-for="Search"
+                               class="form-label fw-semibold">
+                            Search Jobs
+                        </label>
+
+                        <input asp-for="Search"
+                               class="form-control"
+                               placeholder="Job title, skill or company" />
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="col-lg-3">
+
+                        <label asp-for="Location"
+                               class="form-label fw-semibold">
+                            Location
+                        </label>
+
+                        <input asp-for="Location"
+                               class="form-control"
+                               placeholder="e.g. Kumasi" />
+
+                    </div>
+
+
+                    <!-- Job Type -->
+
+                    <div class="col-lg-2">
+
+                        <label asp-for="JobType"
+                               class="form-label fw-semibold">
+                            Job Type
+                        </label>
+
+                        <select asp-for="JobType"
+                                class="form-select"
+                                asp-items="Html.GetEnumSelectList<JobFinder.Models.Enums.JobType>()">
+
+                            <option value="">
+                                All
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Category -->
+
+                    <div class="col-lg-2">
+
+                        <label asp-for="Category"
+                               class="form-label fw-semibold">
+                            Category
+                        </label>
+
+                        <input asp-for="Category"
+                               class="form-control"
+                               placeholder="e.g. IT" />
+
+                    </div>
+
+
+                    <!-- Search Button -->
+
+                    <div class="col-lg-1 d-flex align-items-end">
+
+                        <button type="submit"
+                                class="btn btn-primary w-100"
+                                title="Search">
+
+                            <i class="fa-solid fa-search"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Job Count -->
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h5 class="fw-bold mb-0">
+            Available Jobs
+        </h5>
+
+        <span class="text-muted">
+            @Model.Jobs.Count job(s) found
+        </span>
+
+    </div>
+
+
+    <!-- No Jobs -->
+
+    @if (!Model.Jobs.Any())
+    {
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body text-center py-5">
+
+                <i class="fa-solid fa-briefcase fa-3x text-muted mb-3"></i>
+
+                <h5>
+                    No jobs found
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Try changing your search or filter options.
+                </p>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+
+        <!-- Job Cards -->
+
+        <div class="row g-4">
+
+            @foreach (var job in Model.Jobs)
+            {
+                <div class="col-lg-6">
+
+                    <div class="card h-100 border-0 shadow-sm">
+
+                        <div class="card-body p-4">
+
+                            <!-- Company -->
+
+                            <div class="d-flex align-items-start mb-3">
+
+                                @if (!string.IsNullOrWhiteSpace(
+                                    job.CompanyLogoUrl))
+                                {
+                                    <img src="@job.CompanyLogoUrl"
+                                         alt="@job.CompanyName"
+                                         class="rounded me-3"
+                                         style="width:55px;height:55px;object-fit:cover;" />
+                                }
+                                else
+                                {
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-center me-3"
+                                         style="width:55px;height:55px;">
+
+                                        <i class="fa-solid fa-building text-muted"></i>
+
+                                    </div>
+                                }
+
+                                <div>
+
+                                    <h5 class="fw-bold mb-1">
+                                        @job.Title
+                                    </h5>
+
+                                    <p class="text-muted mb-0">
+                                        @job.CompanyName
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Job Information -->
+
+                            <div class="mb-3">
+
+                                <span class="badge bg-light text-dark me-1">
+                                    <i class="fa-solid fa-location-dot me-1"></i>
+                                    @job.Location
+                                </span>
+
+                                @if (job.JobType.HasValue)
+                                {
+                                    <span class="badge bg-light text-dark me-1">
+                                        @job.JobType
+                                    </span>
+                                }
+
+                                <span class="badge bg-light text-dark">
+                                    @job.Category
+                                </span>
+
+                            </div>
+
+
+                            <!-- Description -->
+
+                            <p class="text-muted">
+
+                                @(job.Description.Length > 150
+                                    ? job.Description.Substring(0, 150) + "..."
+                                    : job.Description)
+
+                            </p>
+
+
+                            <!-- Salary -->
+
+                            @if (job.SalaryMin.HasValue ||
+                                 job.SalaryMax.HasValue)
+                            {
+                                <p class="fw-semibold mb-2">
+
+                                    <i class="fa-solid fa-money-bill-wave me-1"></i>
+
+                                    @if (job.SalaryMin.HasValue &&
+                                         job.SalaryMax.HasValue)
+                                    {
+                                        @:GHS @job.SalaryMin.Value.ToString("N0")
+                                        @: - GHS @job.SalaryMax.Value.ToString("N0")
+                                    }
+                                    else if (job.SalaryMin.HasValue)
+                                    {
+                                        @:From GHS @job.SalaryMin.Value.ToString("N0")
+                                    }
+                                    else
+                                    {
+                                        @:Up to GHS @job.SalaryMax.Value.ToString("N0")
+                                    }
+
+                                </p>
+                            }
+
+
+                            <!-- Posted Date -->
+
+                            <small class="text-muted">
+
+                                Posted
+                                @job.PostedDate.ToLocalTime()
+                                    .ToString("dd MMM yyyy")
+
+                            </small>
+
+                        </div>
+
+
+                        <!-- Actions -->
+
+                        <div class="card-footer bg-white border-0 p-4 pt-0">
+
+                            <div class="d-flex gap-2">
+
+                                <a asp-controller="Applicant"
+                                   asp-action="JobDetails"
+                                   asp-route-id="@job.JobId"
+                                   class="btn btn-primary flex-fill">
+
+                                    View Details
+
+                                </a>
+
+                                @if (job.IsSaved)
+                                {
+                                    <span class="btn btn-outline-success"
+                                          title="Saved">
+
+                                        <i class="fa-solid fa-bookmark"></i>
+
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="btn btn-outline-secondary"
+                                          title="Not saved">
+
+                                        <i class="fa-regular fa-bookmark"></i>
+
+                                    </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+

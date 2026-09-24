@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Help Centre | HireSphere";
+    ViewBag.Title = "Help Centre | JobFinder";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,7 +30,7 @@
                         <i class="fa-solid fa-envelope-open-text fa-3x text-success mb-3"></i>
                         <h5 class="fw-bold">Contact Support</h5>
                         <p class="text-muted">Need more help? Contact our support team for assistance with your account.</p>
-                        <a href="mailto:support@hiresphere.com" class="btn btn-outline-success btn-sm">Email Support</a>
+                        <a href="mailto:support@jobfinder.com" class="btn btn-outline-success btn-sm">Email Support</a>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="chatModalLabel">Chat with Sphere 🤖</h5>
+                <h5 class="modal-title" id="chatModalLabel">Chat with JobFinder 🤖</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -94,7 +94,7 @@
 const faqs = [
     { 
         question: "How do I reset my password?", 
-        answer: "To reset your password, navigate to the login page and click on the 'Forgot Password?' link located below the login button. Enter your registered email address, and we'll send you a secure password reset link within minutes. Click the link in the email to create a new password. If you don't receive the email, check your spam folder or contact our support team at support@hiresphere.com for assistance."
+        answer: "To reset your password, navigate to the login page and click on the 'Forgot Password?' link located below the login button. Enter your registered email address, and we'll send you a secure password reset link within minutes. Click the link in the email to create a new password. If you don't receive the email, check your spam folder or contact our support team at support@jobfinder.com for assistance."
     },
     { 
         question: "Can I update my profile?", 
@@ -102,11 +102,11 @@ const faqs = [
     },
     { 
         question: "How can I contact support?", 
-        answer: "We offer multiple ways to get in touch with our support team. You can email us directly at support@hiresphere.com for detailed inquiries, use the 'Contact Support' button in the Help Centre, or chat with our AI assistant Sphere for instant answers to common questions. Our support team typically responds to emails within 24 hours during business days. For urgent matters, we recommend using the chat feature for immediate assistance."
+        answer: "We offer multiple ways to get in touch with our support team. You can email us directly at support@jobfinder.com for detailed inquiries, use the 'Contact Support' button in the Help Centre, or chat with our AI assistant JobFinder for instant answers to common questions. Our support team typically responds to emails within 24 hours during business days. For urgent matters, we recommend using the chat feature for immediate assistance."
     },
     { 
-        question: "Is HireSphere free to use?", 
-        answer: "Yes, HireSphere is completely free to use for both job seekers and employers! You can create an account, browse unlimited job listings, apply to positions, and use our AI-powered job matching features at no cost. Employers can post jobs, review applications, and communicate with candidates for free. We may introduce optional premium features in the future for advanced analytics and priority support, but all core functionality will remain free forever."
+        question: "Is JobFinder free to use?", 
+        answer: "Yes, JobFinder is completely free to use for both job seekers and employers! You can create an account, browse unlimited job listings, apply to positions, and use our AI-powered job matching features at no cost. Employers can post jobs, review applications, and communicate with candidates for free. We may introduce optional premium features in the future for advanced analytics and priority support, but all core functionality will remain free forever."
     },
     { 
         question: "How does the AI job matching work?", 
@@ -114,7 +114,7 @@ const faqs = [
     },
     { 
         question: "How do I apply for a job?", 
-        answer: "Applying for jobs on HireSphere is simple and straightforward. First, browse available positions using the search filters or view AI-recommended jobs on your dashboard. When you find a job you're interested in, click on it to view full details. Review the job description, requirements, and company information carefully. If it's a good fit, click the 'Apply' button. Your profile information and uploaded resume will be automatically sent to the employer. You can track all your applications in your dashboard and receive notifications about status updates."
+        answer: "Applying for jobs on JobFinder is simple and straightforward. First, browse available positions using the search filters or view AI-recommended jobs on your dashboard. When you find a job you're interested in, click on it to view full details. Review the job description, requirements, and company information carefully. If it's a good fit, click the 'Apply' button. Your profile information and uploaded resume will be automatically sent to the employer. You can track all your applications in your dashboard and receive notifications about status updates."
     },
     { 
         question: "Can employers see my profile before I apply?", 
@@ -130,7 +130,7 @@ const faqs = [
     },
     { 
         question: "How do I delete my account?", 
-        answer: "If you wish to delete your HireSphere account, log in and navigate to Settings from your dashboard. Scroll down to the 'Account Management' section and click on 'Delete Account'. You'll be asked to confirm this action as it's permanent and cannot be undone. All your data, including profile information, applications, and messages, will be permanently removed from our system within 30 days. If you're experiencing issues or have concerns, please contact our support team first – we're here to help and may be able to resolve your concerns without account deletion."
+        answer: "If you wish to delete your JobFinder account, log in and navigate to Settings from your dashboard. Scroll down to the 'Account Management' section and click on 'Delete Account'. You'll be asked to confirm this action as it's permanent and cannot be undone. All your data, including profile information, applications, and messages, will be permanently removed from our system within 30 days. If you're experiencing issues or have concerns, please contact our support team first – we're here to help and may be able to resolve your concerns without account deletion."
     }
 ];
 
@@ -167,7 +167,7 @@ async function sendMessage() {
     });
 
     const data = await response.json();
-    chatBox.innerHTML += `<div><strong>Sphere:</strong> ${data.reply}</div>`;
+    chatBox.innerHTML += `<div><strong>JobFinder:</strong> ${data.reply}</div>`;
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 </script>

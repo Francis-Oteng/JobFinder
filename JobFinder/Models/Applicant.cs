@@ -9,9 +9,9 @@ namespace JobFinder.Models
         public int ApplicantId { get; set; }
 
         /// <summary>FK to the account. Unique index enforces the 1 : 0..1 relationship.</summary>
-        public string UserId { get; set; } = null!;
-      
+        public string UserId { get; set; } = string.Empty;
 
+        public virtual ApplicationUser User { get; set; } = null!;
         public string? PhoneNumber { get; set; }
 
         public string? Location { get; set; }
@@ -43,7 +43,7 @@ namespace JobFinder.Models
 
         // ---- Navigation ----
 
-        public virtual ApplicationUser User { get; set; } = null!;
+       // public virtual ApplicationUser User { get; set; } = null!;
 
         public virtual ICollection<Application> Applications { get; set; } = new List<Application>();
 

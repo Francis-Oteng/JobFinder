@@ -1,4 +1,4 @@
-﻿ @{
+﻿@{
     ViewBag.Title = "Dashboard | JobFinder";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -20,7 +20,7 @@
                 }
                 else if (userRole == "Employer")
                 {
-                    <a href ="/Employer/CreateProfile" class="btn btn-outline-primary">
+                    <a href="/Employer/CreateProfile" class="btn btn-outline-primary">
                         <i class="fa-solid fa-building-user me-2"></i>Complete Profile
                     </a>
                 }
@@ -41,9 +41,8 @@
                 <div class="card stat-card shadow-sm border-0 text-center p-3 animate-fade">
                     <div class="icon mb-2 text-success"><i class="fa-solid fa-file-lines fa-2x"></i></div>
                     <h5 class="fw-bold">Applications Sent</h5>
-                   <p class="text-muted mb-0"> 
-    @((userRole == "Applicant") ? (ViewBag.ApplicationCount?.ToString() ?? "0") : "—")
-</p>
+                    <p class="text-muted mb-0">@((userRole == "Applicant") ? ViewBag.ApplicationCount.ToString() : "—")</p>
+                </div>
             </div>
             <div class="col-md-3">
                 <div class="card stat-card shadow-sm border-0 text-center p-3 animate-fade">
@@ -156,7 +155,7 @@
         <!-- COMMON SECTION -->
         <div class="card border-0 shadow-sm rounded-4 animate-fade">
             <div class="card-body text-center">
-                <h5 class="fw-bold text-primary"><i class="fa-solid fa-robot me-2"></i>JobFinder AI Tips</h5>
+                <h5 class="fw-bold text-primary"><i class="fa-solid fa-robot me-2"></i>Sphere AI Tips</h5>
                 <p class="text-muted">💡 "Consistency in applications increases your visibility score by 70%. Keep applying!"</p>
             </div>
         </div>

@@ -1,0 +1,370 @@
+﻿@model JobFinder.Models.ViewModels.JobDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+
+    <!-- Messages -->
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show"
+             role="alert">
+
+            @TempData["SuccessMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show"
+             role="alert">
+
+            @TempData["ErrorMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+
+    <!-- Back -->
+
+    <div class="mb-4">
+
+        <a asp-controller="Applicant"
+           asp-action="Jobs"
+           class="text-decoration-none">
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            Back to Available Jobs
+
+        </a>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- Main Job Information -->
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Job Header -->
+
+                    <div class="d-flex align-items-start mb-4">
+
+                        @if (!string.IsNullOrWhiteSpace(
+                            Model.CompanyLogoUrl))
+                        {
+                            <img src="@Model.CompanyLogoUrl"
+                                 alt="@Model.CompanyName"
+                                 class="rounded me-3"
+                                 style="width:70px;height:70px;object-fit:cover;" />
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center me-3"
+                                 style="width:70px;height:70px;">
+
+                                <i class="fa-solid fa-building fa-lg text-muted"></i>
+
+                            </div>
+                        }
+
+                        <div>
+
+                            <h2 class="fw-bold mb-1">
+                                @Model.Title
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                @Model.CompanyName
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Job Tags -->
+
+                    <div class="mb-4">
+
+                        <span class="badge bg-light text-dark me-1">
+                            <i class="fa-solid fa-location-dot me-1"></i>
+                            @Model.Location
+                        </span>
+
+                        @if (Model.JobType.HasValue)
+                        {
+                            <span class="badge bg-light text-dark me-1">
+                                @Model.JobType
+                            </span>
+                        }
+
+                        <span class="badge bg-light text-dark">
+                            @Model.Category
+                        </span>
+
+                    </div>
+
+
+                    <!-- Salary -->
+
+                    @if (Model.SalaryMin.HasValue ||
+                         Model.SalaryMax.HasValue)
+                    {
+                        <div class="mb-4">
+
+                            <h6 class="fw-bold">
+                                Salary
+                            </h6>
+
+                            <p class="text-muted">
+
+                                <i class="fa-solid fa-money-bill-wave me-2"></i>
+
+                                @if (Model.SalaryMin.HasValue &&
+                                     Model.SalaryMax.HasValue)
+                                {
+                                    @:GHS @Model.SalaryMin.Value.ToString("N0")
+                                    @: - GHS @Model.SalaryMax.Value.ToString("N0")
+                                }
+                                else if (Model.SalaryMin.HasValue)
+                                {
+                                    @:From GHS @Model.SalaryMin.Value.ToString("N0")
+                                }
+                                else
+                                {
+                                    @:Up to GHS @Model.SalaryMax.Value.ToString("N0")
+                                }
+
+                            </p>
+
+                        </div>
+                    }
+
+
+                    <hr />
+
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <h5 class="fw-bold mb-3">
+                            Job Description
+                        </h5>
+
+                        <div style="white-space: pre-line;">
+                            @Model.Description
+                        </div>
+
+                    </div>
+
+
+                    <!-- Dates -->
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <h6 class="fw-bold">
+                                Posted
+                            </h6>
+
+                            <p class="text-muted">
+                                @Model.PostedDate
+                                    .ToLocalTime()
+                                    .ToString("dd MMM yyyy")
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h6 class="fw-bold">
+                                Application Deadline
+                            </h6>
+
+                            <p class="text-muted">
+                                @Model.ClosingDate
+                                    .ToLocalTime()
+                                    .ToString("dd MMM yyyy")
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Right Sidebar -->
+
+        <div class="col-lg-4">
+
+            <!-- Application Card -->
+
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">
+                        Application
+                    </h5>
+
+
+                    @if (Model.HasApplied)
+                    {
+                        <div class="alert alert-success">
+
+                            <i class="fa-solid fa-circle-check me-2"></i>
+
+                            You have already applied for this job.
+
+                        </div>
+                    }
+                    else if (Model.ClosingDate < DateTime.UtcNow)
+                    {
+                        <div class="alert alert-danger">
+
+                            This job is no longer accepting applications.
+
+                        </div>
+                    }
+                    else
+                    {
+                        <form asp-controller="Applicant"
+                              asp-action="Apply"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="jobId"
+                                   value="@Model.JobId" />
+
+                            <button type="submit"
+                                    class="btn btn-primary w-100">
+
+                                <i class="fa-solid fa-paper-plane me-2"></i>
+
+                                Apply Now
+
+                            </button>
+
+                        </form>
+                    }
+
+
+                    <!-- Save Job -->
+
+                    <form asp-controller="Applicant"
+                          asp-action="ToggleSaveJob"
+                          method="post"
+                          class="mt-2">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="jobId"
+                               value="@Model.JobId" />
+
+                        @if (Model.IsSaved)
+                        {
+                            <button type="submit"
+                                    class="btn btn-outline-danger w-100">
+
+                                <i class="fa-solid fa-bookmark me-2"></i>
+
+                                Remove Saved Job
+
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit"
+                                    class="btn btn-outline-secondary w-100">
+
+                                <i class="fa-regular fa-bookmark me-2"></i>
+
+                                Save Job
+
+                            </button>
+                        }
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- Company Card -->
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">
+                        About the Company
+                    </h5>
+
+                    <h6 class="fw-semibold">
+                        @Model.CompanyName
+                    </h6>
+
+                    @if (!string.IsNullOrWhiteSpace(
+                        Model.CompanyDescription))
+                    {
+                        <p class="text-muted">
+                            @Model.CompanyDescription
+                        </p>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(
+                        Model.CompanyWebsite))
+                    {
+                        <a href="@Model.CompanyWebsite"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn btn-outline-primary btn-sm">
+
+                            <i class="fa-solid fa-globe me-1"></i>
+
+                            Company Website
+
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

@@ -7,7 +7,8 @@ namespace JobFinder.Models
         public int EmployerId { get; set; }
 
         /// <summary>FK to the account. Unique index enforces the 1 : 0..1 relationship.</summary>
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public virtual ApplicationUser User { get; set; } = null!;
 
         public string CompanyName { get; set; } = null!;
 
@@ -32,7 +33,7 @@ namespace JobFinder.Models
 
         // ---- Navigation ----
 
-        public virtual ApplicationUser User { get; set; } = null!;
+      //  public virtual ApplicationUser User { get; set; } = null!;
 
         public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
 

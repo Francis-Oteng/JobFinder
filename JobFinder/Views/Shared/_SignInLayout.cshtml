@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - JobFinder</title>
+
+    <!-- Bootstrap & Site CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/JobFinder.styles.css" asp-append-version="true" />
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          integrity="sha512-0vK1F5nMObJ4xZPnHskT1bOIH6dCHcFfQFjE3P9Kq6e0IexP/j1qpQhkoyZNEqfSPKkuPsvfOykxN5aXGyv0rQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- ========================= NAVBAR ========================= -->
+    <header>
+       
+    </header>
+
+    <!-- ========================= MAIN CONTENT ========================= -->
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- ========================= FOOTER ========================= -->
+    <footer class="border-top footer text-muted py-3 mt-5">
+        <div class="container text-center">
+            <span>&copy; 2025 - <strong>JobFinder</strong></span> |
+            <a asp-area="" asp-controller="Home" asp-action="Privacy"
+               class="text-decoration-none text-secondary">Privacy</a> |
+            <a asp-area="" asp-controller="Home" asp-action="Help"
+               class="text-decoration-none text-secondary">Help Centre</a>
+        </div>
+    </footer>
+
+    <!-- ========================= SCRIPTS ========================= -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- ========================= CUSTOM STYLES ========================= -->
+    <style>
+        .navbar-brand {
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+        }
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            transition: color 0.3s ease;
+            margin-right: 12px;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #2563eb !important;
+        }
+        .btn-outline-primary:hover {
+            background-color: #2563eb;
+            color: white !important;
+        }
+        footer {
+            background: #f8f9fa;
+        }
+        footer a:hover {
+            color: #2563eb !important;
+        }
+    </style>
+</body>
+</html>

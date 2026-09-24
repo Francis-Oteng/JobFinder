@@ -1,10 +1,10 @@
 using JobFinder.Data;
+using JobFinder.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -12,8 +12,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+// Identity
+builder.Services
+    .AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+
+
+
+
+
 var app = builder.Build();
 
+     
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
