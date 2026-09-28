@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+using JobFinder.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using static JobFinder.Models.Enums;
 
@@ -6,70 +8,74 @@ namespace JobFinder.Models.ViewModels
 {
     public class PostJobViewModel
     {
-        public int JobId { get; set; }
+        public int? JobId { get; set; }
 
-        [Required, StringLength(150)]
-        public string Title { get; set; } = null!;
+        [Required]
+        [StringLength(150)]
+        public string Title { get; set; } = string.Empty;
 
-        [Required, DataType(DataType.MultilineText)]
-        public string Description { get; set; } = null!;
+        [Required]
+        public string Description { get; set; } = string.Empty;
 
-        [Required, DataType(DataType.MultilineText)]
-        public string Requirements { get; set; } = null!;
+        [Required]
+        public string Requirements { get; set; } = string.Empty;
 
-        [DataType(DataType.MultilineText)]
         public string? Responsibilities { get; set; }
 
-        [StringLength(2000)]
         public string? Benefits { get; set; }
 
-        [StringLength(1000)]
-        [Display(Name = "Required skills")]
+        [Display(Name = "Required Skills")]
         public string? RequiredSkills { get; set; }
 
-        [StringLength(500)]
         public string? Education { get; set; }
 
-        [Display(Name = "Experience level")]
+        [Display(Name = "Experience Level")]
         public ExperienceLevel? ExperienceLevel { get; set; }
 
         [Range(0, 60)]
-        [Display(Name = "Years of experience")]
+        [Display(Name = "Years of Experience")]
         public int? ExperienceYears { get; set; }
 
-        [StringLength(100)]
         public string? Category { get; set; }
 
-        [Required, StringLength(150)]
-        public string Location { get; set; } = null!;
+        [Required]
+        public string Location { get; set; } = string.Empty;
 
         [Required]
-        [Display(Name = "Job type")]
+        [Display(Name = "Job Type")]
         public JobType JobType { get; set; } = JobType.FullTime;
 
         [Required]
-        [Display(Name = "Work arrangement")]
+        [Display(Name = "Work Arrangement")]
         public WorkArrangement WorkArrangement { get; set; } = WorkArrangement.Onsite;
 
-        [Range(0, 100_000_000)]
-        [Display(Name = "Minimum salary")]
+        [Range(0, 100000000)]
+        [Display(Name = "Minimum Salary")]
         public decimal? SalaryMin { get; set; }
 
-        [Range(0, 100_000_000)]
-        [Display(Name = "Maximum salary")]
+        [Range(0, 100000000)]
+        [Display(Name = "Maximum Salary")]
         public decimal? SalaryMax { get; set; }
 
         [Required]
         public JobStatus Status { get; set; } = JobStatus.Draft;
 
         [DataType(DataType.Date)]
-        [Display(Name = "Closing date")]
+        [Display(Name = "Closing Date")]
         public DateTime? ClosingDate { get; set; }
 
-        // ---- Populated by the controller for the dropdowns ----
+
+        // ============================================================
+        // SELECT LIST OPTIONS
+        // ============================================================
+
         public List<SelectListItem> JobTypeOptions { get; set; } = new();
+
         public List<SelectListItem> WorkArrangementOptions { get; set; } = new();
+
         public List<SelectListItem> ExperienceLevelOptions { get; set; } = new();
+
         public List<SelectListItem> StatusOptions { get; set; } = new();
     }
 }
+
