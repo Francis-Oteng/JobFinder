@@ -25,13 +25,132 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account"   asp-action="Register">Register</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <!-- Applicant Menu -->
+    @if (User.IsInRole("Applicant"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Applicant"
+               asp-action="Dashboard">
+                Dashboard
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Applicant"
+               asp-action="Jobs">
+                Find Jobs
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Applicant"
+               asp-action="Applications">
+                My Applications
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Applicant"
+               asp-action="SavedJobs">
+                Saved Jobs
+            </a>
+        </li>
+    }
+
+    <!-- Employer Menu -->
+    @if (User.IsInRole("Employer"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Employer"
+               asp-action="Dashboard">
+                Dashboard
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Employer"
+               asp-action="Jobs">
+                My Jobs
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Employer"
+               asp-action="PostJob">
+                Post a Job
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Employer"
+               asp-action="Applicants">
+                Applicants
+            </a>
+        </li>
+    }
+
+    <!-- Admin Menu -->
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+               asp-controller="Admin"
+               asp-action="Dashboard">
+                Admin Dashboard
+            </a>
+        </li>
+    }
+
+    <!-- Logout - available to every authenticated user -->
+    <li class="nav-item">
+        <form asp-controller="Account"
+              asp-action="Logout"
+              method="post"
+              class="d-inline">
+
+            <button type="submit"
+                    class="nav-link btn btn-link text-dark">
+                Logout
+            </button>
+
+        </form>
+    </li>
+}
+else
+{
+    <!-- Guest Menu -->
+    <li class="nav-item">
+        <a class="nav-link text-dark"
+           asp-controller="Account"
+           asp-action="Register">
+            Register
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark"
+           asp-controller="Account"
+           asp-action="Login">
+            Login
+        </a>
+    </li>
+}
+
+
+                         
                        @*  <partial name="_LoginPartial" /> *@
                     </ul>
                 </div>
