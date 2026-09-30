@@ -1,0 +1,334 @@
+﻿@model JobFinder.Models.ViewModels.JobApplicantsViewModel
+
+@{
+    ViewData["Title"] = "Job Applicants";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <a asp-controller="Employer"
+               asp-action="Jobs"
+               class="text-decoration-none text-muted small">
+                <i class="fa-solid fa-arrow-left me-1"></i>
+                Back to My Jobs
+            </a>
+
+            <h2 class="mt-2 mb-1">
+                @Model.JobTitle
+            </h2>
+
+            <p class="text-muted mb-0">
+                Applicants for this job
+            </p>
+        </div>
+
+        <div>
+            <a asp-controller="Employer"
+               asp-action="EditJob"
+               asp-route-id="@Model.JobId"
+               class="btn btn-outline-primary">
+                <i class="fa-solid fa-pen me-1"></i>
+                Edit Job
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Summary -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="text-muted small">
+                        Total Applicants
+                    </div>
+
+                    <div class="fs-3 fw-bold">
+                        @Model.TotalApplicants
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="text-muted small">
+                        New Applications
+                    </div>
+
+                    <div class="fs-3 fw-bold">
+                        @Model.Applicants.Count(a => a.Status.ToString() == "Pending")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="text-muted small">
+                        Average Match Score
+                    </div>
+
+                    <div class="fs-3 fw-bold">
+                        @{
+                            var scores = Model.Applicants
+                                .Where(a => a.AIMatchScore.HasValue)
+                                .Select(a => a.AIMatchScore!.Value)
+                                .ToList();
+
+                            var averageScore = scores.Any()
+                                ? Math.Round(scores.Average(), 0)
+                                : 0;
+                        }
+
+                        @averageScore%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Applicants -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white py-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h5 class="mb-0">
+                        Applicants
+                    </h5>
+
+                    <small class="text-muted">
+                        @Model.TotalApplicants applicant(s) have applied for this position.
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-body p-0">
+
+            @if (!Model.Applicants.Any())
+            {
+                <div class="text-center py-5">
+
+                    <i class="fa-solid fa-users fa-3x text-muted mb-3"></i>
+
+                    <h5>No applicants yet</h5>
+
+                    <p class="text-muted mb-0">
+                        Applicants will appear here when they apply for this job.
+                    </p>
+
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+
+                            <tr>
+                                <th>Applicant</th>
+                                <th>Location</th>
+                                <th>Experience</th>
+                                <th>Match</th>
+                                <th>Applied</th>
+                                <th>Status</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var applicant in Model.Applicants)
+                            {
+                                <tr>
+
+                                    <!-- Applicant -->
+                                    <td>
+
+                                        <div class="d-flex align-items-center">
+
+                                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
+                                                 style="width:45px;height:45px;">
+
+                                                @if (!string.IsNullOrWhiteSpace(applicant.FullName))
+                                                {
+                                                    @applicant.FullName.Substring(0, 1).ToUpper()
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa-solid fa-user"></i>
+                                                }
+
+                                            </div>
+
+                                            <div>
+
+                                                <div class="fw-semibold">
+                                                    @applicant.FullName
+                                                </div>
+
+                                                <div class="small text-muted">
+                                                    @applicant.Email
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Location -->
+                                    <td>
+
+                                        @if (!string.IsNullOrWhiteSpace(applicant.Location))
+                                        {
+                                            <span>
+                                                <i class="fa-solid fa-location-dot text-muted me-1"></i>
+                                                @applicant.Location
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                Not provided
+                                            </span>
+                                        }
+
+                                    </td>
+
+
+                                    <!-- Experience -->
+                                    <td>
+
+                                        @if (applicant.ExperienceYears.HasValue)
+                                        {
+                                            <span>
+                                                @applicant.ExperienceYears year(s)
+                                            </span>
+                                        }
+                                        else if (!string.IsNullOrWhiteSpace(applicant.ExperienceLevel))
+                                        {
+                                            <span>
+                                                @applicant.ExperienceLevel
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                Not provided
+                                            </span>
+                                        }
+
+                                    </td>
+
+
+                                    <!-- AI Match Score -->
+                                    <td>
+
+                                        @if (applicant.AIMatchScore.HasValue)
+                                        {
+                                            <span class="badge bg-primary">
+                                                @applicant.AIMatchScore%
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                Pending
+                                            </span>
+                                        }
+
+                                    </td>
+
+
+                                    <!-- Application Date -->
+                                    <td>
+
+                                        <span>
+                                            @applicant.ApplicationDate.ToString("MMM d, yyyy")
+                                        </span>
+
+                                        <br />
+
+                                        <small class="text-muted">
+                                            @applicant.ApplicationDate.ToString("hh:mm tt")
+                                        </small>
+
+                                    </td>
+
+
+                                    <!-- Status -->
+                                    <td>
+
+                                        @{
+                                            var status = applicant.Status.ToString();
+
+                                            var badgeClass = status switch
+                                            {
+                                                "Pending" => "bg-warning text-dark",
+                                                "Submitted" => "bg-primary",
+                                                "Shortlisted" => "bg-success",
+                                                "Rejected" => "bg-danger",
+                                                "Withdrawn" => "bg-secondary",
+                                                _ => "bg-secondary"
+                                            };
+                                        }
+
+                                        <span class="badge @badgeClass">
+                                            @status
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- Action -->
+                                    <td class="text-end">
+
+                                        <a asp-controller="Employer"
+                                           asp-action="ApplicantDetails"
+                                           asp-route-id="@applicant.ApplicationId"
+                                           class="btn btn-sm btn-outline-primary">
+
+                                            <i class="fa-solid fa-eye me-1"></i>
+                                            View
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

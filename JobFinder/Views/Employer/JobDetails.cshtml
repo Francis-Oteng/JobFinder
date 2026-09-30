@@ -1,0 +1,410 @@
+﻿@model JobFinder.Models.Job
+
+@using static JobFinder.Models.Enums
+
+@{
+    ViewData["Title"] = "Job Details";
+
+    var statusClass = Model.Status switch
+    {
+        JobStatus.Active => "bg-success",
+        JobStatus.Draft => "bg-warning text-dark",
+        JobStatus.Closed => "bg-secondary",
+        JobStatus.Expired => "bg-danger",
+        _ => "bg-secondary"
+    };
+}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-start mb-4">
+
+        <div>
+            <div class="mb-2">
+                <a asp-controller="Employer"
+                   asp-action="Jobs"
+                   class="text-decoration-none">
+                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    Back to My Jobs
+                </a>
+            </div>
+
+            <h1 class="fw-bold mb-2">
+                @Model.Title
+            </h1>
+
+            <p class="text-muted mb-0">
+                <i class="fa-solid fa-building me-2"></i>
+                @Model.Employer.CompanyName
+            </p>
+        </div>
+
+        <span class="badge @statusClass px-3 py-2">
+            @Model.Status
+        </span>
+
+    </div>
+
+    <!-- Action buttons -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <a asp-controller="Employer"
+                   asp-action="EditJob"
+                   asp-route-id="@Model.JobId"
+                   class="btn btn-primary">
+                    <i class="fa-solid fa-pen-to-square me-2"></i>
+                    Edit Job
+                </a>
+
+                <a asp-controller="Employer"
+                   asp-action="JobApplicants"
+                   asp-route-id="@Model.JobId"
+                   class="btn btn-outline-primary">
+                    <i class="fa-solid fa-users me-2"></i>
+                    View Applicants
+
+                    <span class="badge bg-primary ms-1">
+                        @Model.Applications.Count
+                    </span>
+                </a>
+
+                <a asp-controller="Employer"
+                   asp-action="DeleteJob"
+                   asp-route-id="@Model.JobId"
+                   class="btn btn-outline-danger">
+                    <i class="fa-solid fa-trash me-2"></i>
+                    Delete Job
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Main job information -->
+        <div class="col-lg-8">
+
+            <!-- Job overview -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h4 class="fw-bold mb-4">
+                        Job Overview
+                    </h4>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <div class="text-muted small mb-1">
+                                Job Type
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.JobType
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted small mb-1">
+                                Work Arrangement
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.WorkArrangement
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted small mb-1">
+                                Category
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Category
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted small mb-1">
+                                Location
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Location
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted small mb-1">
+                                Experience Level
+                            </div>
+
+                            <div class="fw-semibold">
+                                @(Model.ExperienceLevel?.ToString() ?? "Not specified")
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted small mb-1">
+                                Experience Required
+                            </div>
+
+                            <div class="fw-semibold">
+                                @(Model.ExperienceYears.HasValue
+                                    ? $"{Model.ExperienceYears} years"
+                                    : "Not specified")
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Description -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h4 class="fw-bold mb-3">
+                        Job Description
+                    </h4>
+
+                    <div class="text-muted">
+                        @Html.Raw(Model.Description?.Replace("\n", "<br />"))
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Requirements -->
+            @if (!string.IsNullOrWhiteSpace(Model.Requirements))
+            {
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-3">
+                            Requirements
+                        </h4>
+
+                        <div class="text-muted">
+                            @Html.Raw(Model.Requirements.Replace("\n", "<br />"))
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+            <!-- Responsibilities -->
+            @if (!string.IsNullOrWhiteSpace(Model.Responsibilities))
+            {
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-3">
+                            Responsibilities
+                        </h4>
+
+                        <div class="text-muted">
+                            @Html.Raw(Model.Responsibilities.Replace("\n", "<br />"))
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+            <!-- Benefits -->
+            @if (!string.IsNullOrWhiteSpace(Model.Benefits))
+            {
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-3">
+                            Benefits
+                        </h4>
+
+                        <div class="text-muted">
+                            @Html.Raw(Model.Benefits.Replace("\n", "<br />"))
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+            <!-- Required Skills -->
+            @if (!string.IsNullOrWhiteSpace(Model.RequiredSkills))
+            {
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-3">
+                            Required Skills
+                        </h4>
+
+                        <div class="d-flex flex-wrap gap-2">
+
+                            @foreach (var skill in Model.RequiredSkills.Split(
+                                ',',
+                                StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                <span class="badge bg-light text-dark border px-3 py-2">
+                                    @skill.Trim()
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+
+            <!-- Salary -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">
+                        Salary
+                    </h5>
+
+                    @if (Model.SalaryMin.HasValue || Model.SalaryMax.HasValue)
+                    {
+                        <div class="fs-4 fw-bold">
+
+                            @if (Model.SalaryMin.HasValue &&
+                                 Model.SalaryMax.HasValue)
+                            {
+                                @($"{Model.SalaryMin:N0} - {Model.SalaryMax:N0}")
+                            }
+                            else if (Model.SalaryMin.HasValue)
+                            {
+                                @($"From {Model.SalaryMin:N0}")
+                            }
+                            else
+                            {
+                                @($"Up to {Model.SalaryMax:N0}")
+                            }
+
+                        </div>
+
+                        <div class="text-muted small">
+                            Salary range
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-muted">
+                            Salary not specified
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- Posting information -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">
+                        Posting Information
+                    </h5>
+
+                    <div class="mb-3">
+
+                        <div class="text-muted small">
+                            Posted
+                        </div>
+
+                        <div class="fw-semibold">
+                            @(Model.PostedDate.ToLocalTime().ToString("dd MMM yyyy"))
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <div class="text-muted small">
+                            Application Deadline
+                        </div>
+
+                        <div class="fw-semibold">
+
+                            @if (Model.ClosingDate.HasValue)
+                            {
+                                <span>
+                                    @(Model.ClosingDate.Value.ToLocalTime().ToString("dd MMM yyyy"))
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    Not specified
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Application statistics -->
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">
+                        Applications
+                    </h5>
+
+                    <div class="display-5 fw-bold">
+                        @Model.Applications.Count
+                    </div>
+
+                    <p class="text-muted mb-3">
+                        Total applications received
+                    </p>
+
+                    <a asp-controller="Employer"
+                       asp-action="JobApplicants"
+                       asp-route-id="@Model.JobId"
+                       class="btn btn-outline-primary w-100">
+                        View Applicants
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

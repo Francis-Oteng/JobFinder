@@ -1,180 +1,416 @@
-﻿@{
-    ViewBag.Title = "View Applicants | JobFinder";
+﻿@model IEnumerable<JobFinder.Models.ViewModels.JobApplicantRowViewModel>
+
+@{
+    ViewData["Title"] = "Applicants";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="back-home-btn">
-    <a href="/Employer/Jobs" class="btn btn-outline-primary btn-sm shadow-sm">
-        <i class="fa-solid fa-arrow-left me-2"></i> Back to Jobs
+    <a asp-controller="Employer"
+       asp-action="Dashboard"
+       class="btn btn-outline-primary btn-sm shadow-sm">
+        <i class="fa-solid fa-arrow-left me-2"></i>
+        Back to Dashboard
     </a>
 </div>
 
 <section class="bg-gradient text-white py-5">
     <div class="container">
-        <h1 class="fw-bold mb-2"><i class="fa-solid fa-users me-2"></i>Applicants for Senior Software Engineer</h1>
-        <p class="lead mb-0">47 applications • Posted Oct 10, 2025</p>
+
+        <h1 class="fw-bold mb-2">
+            <i class="fa-solid fa-users me-2"></i>
+            Applicants
+        </h1>
+
+        <p class="lead mb-0">
+            @Model.Count() application(s) received across your job postings
+        </p>
+
     </div>
 </section>
 
 <section class="py-5">
+
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">All (47)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Shortlisted (12)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Interviewed (5)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Rejected (8)</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4 text-end">
-                <select class="form-select form-select-sm d-inline-block" style="width: auto;">
-                    <option>Best Match</option>
-                    <option>Most Recent</option>
-                    <option>Experience</option>
-                </select>
-            </div>
-        </div>
 
-        <!-- Applicant Card 1 -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-2 text-center">
-                        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Applicant">
-                        <span class="badge bg-success d-block">95% Match</span>
-                    </div>
-                    <div class="col-md-7">
-                        <h5 class="fw-bold mb-1">Sarah Johnson</h5>
-                        <p class="text-muted mb-2">Senior Developer • 8 years experience</p>
-                        <div class="d-flex flex-wrap gap-2 mb-2">
-                            <span class="badge bg-light text-dark">React</span>
-                            <span class="badge bg-light text-dark">Node.js</span>
-                            <span class="badge bg-light text-dark">AWS</span>
-                            <span class="badge bg-light text-dark">TypeScript</span>
-                        </div>
-                        <small class="text-muted"><i class="fa-solid fa-clock me-1"></i>Applied 2 days ago</small>
-                    </div>
-                    <div class="col-md-3 text-end">
-                        <button class="btn btn-primary btn-sm mb-2 w-100">
-                            <i class="fa-solid fa-eye me-1"></i> View Profile
-                        </button>
-                        <button class="btn btn-outline-success btn-sm mb-2 w-100">
-                            <i class="fa-solid fa-check me-1"></i> Shortlist
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm w-100">
-                            <i class="fa-solid fa-times me-1"></i> Reject
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @if (!Model.Any())
+        {
+            <div class="card border-0 shadow-sm">
 
-        <!-- Applicant Card 2 -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-2 text-center">
-                        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Applicant">
-                        <span class="badge bg-warning text-dark d-block">88% Match</span>
-                    </div>
-                    <div class="col-md-7">
-                        <h5 class="fw-bold mb-1">Michael Chen</h5>
-                        <p class="text-muted mb-2">Full Stack Engineer • 6 years experience</p>
-                        <div class="d-flex flex-wrap gap-2 mb-2">
-                            <span class="badge bg-light text-dark">JavaScript</span>
-                            <span class="badge bg-light text-dark">Python</span>
-                            <span class="badge bg-light text-dark">Docker</span>
-                        </div>
-                        <small class="text-muted"><i class="fa-solid fa-clock me-1"></i>Applied 5 days ago</small>
-                    </div>
-                    <div class="col-md-3 text-end">
-                        <button class="btn btn-primary btn-sm mb-2 w-100">
-                            <i class="fa-solid fa-eye me-1"></i> View Profile
-                        </button>
-                        <button class="btn btn-outline-success btn-sm mb-2 w-100">
-                            <i class="fa-solid fa-check me-1"></i> Shortlist
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm w-100">
-                            <i class="fa-solid fa-times me-1"></i> Reject
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <div class="card-body text-center py-5">
 
-        <!-- Applicant Card 3 -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-2 text-center">
-                        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Applicant">
-                        <span class="badge bg-secondary d-block">75% Match</span>
+                    <div class="mb-3">
+                        <i class="fa-solid fa-users-slash fs-1 text-muted"></i>
                     </div>
-                    <div class="col-md-7">
-                        <h5 class="fw-bold mb-1">Emily Rodriguez</h5>
-                        <p class="text-muted mb-2">Software Developer • 4 years experience</p>
-                        <div class="d-flex flex-wrap gap-2 mb-2">
-                            <span class="badge bg-light text-dark">Java</span>
-                            <span class="badge bg-light text-dark">Spring</span>
-                            <span class="badge bg-light text-dark">MySQL</span>
-                        </div>
-                        <small class="text-muted"><i class="fa-solid fa-clock me-1"></i>Applied 1 week ago</small>
-                    </div>
-                    <div class="col-md-3 text-end">
-                        <button class="btn btn-primary btn-sm mb-2 w-100">
-                            <i class="fa-solid fa-eye me-1"></i> View Profile
-                        </button>
-                        <button class="btn btn-outline-success btn-sm mb-2 w-100">
-                            <i class="fa-solid fa-check me-1"></i> Shortlist
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm w-100">
-                            <i class="fa-solid fa-times me-1"></i> Reject
-                        </button>
-                    </div>
+
+                    <h4 class="fw-bold">
+                        No Applicants Yet
+                    </h4>
+
+                    <p class="text-muted mb-4">
+                        You don't have any applications for your job postings yet.
+                    </p>
+
+                    <a asp-controller="Employer"
+                       asp-action="Jobs"
+                       class="btn btn-primary">
+                        <i class="fa-solid fa-briefcase me-2"></i>
+                        View My Jobs
+                    </a>
+
                 </div>
+
             </div>
-        </div>
+        }
+        else
+        {
+            <!-- Filters -->
+            <div class="row mb-4">
+
+                <div class="col-md-8">
+
+                    <ul class="nav nav-pills">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                All (@Model.Count())
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Shortlisted
+                                (@Model.Count(a =>
+                                    a.Status == JobFinder.Models.Enums.ApplicationStatus.Shortlisted))
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Interview
+                                (@Model.Count(a =>
+                                    a.Status == JobFinder.Models.Enums.ApplicationStatus.Interview))
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Rejected
+                                (@Model.Count(a =>
+                                    a.Status == JobFinder.Models.Enums.ApplicationStatus.Rejected))
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-md-4 text-end">
+
+                    <span class="text-muted">
+                        <i class="fa-solid fa-users me-1"></i>
+                        @Model.Count() Applicants
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Applicant Cards -->
+
+            @foreach (var applicant in Model)
+            {
+                var matchClass =
+                    applicant.AIMatchScore >= 90
+                        ? "bg-success"
+                        : applicant.AIMatchScore >= 75
+                            ? "bg-warning text-dark"
+                            : "bg-secondary";
+
+                <div class="card border-0 shadow-sm mb-3">
+
+                    <div class="card-body">
+
+                        <div class="row align-items-center">
+
+                            <!-- Applicant Image -->
+                            <div class="col-md-2 text-center">
+
+                                @if (!string.IsNullOrWhiteSpace(
+                                    applicant.ResumeUrl))
+                                {
+                                    <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center bg-light"
+                                         style="width:80px;height:80px;">
+
+                                        <i class="fa-solid fa-user fs-2 text-secondary"></i>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center bg-light"
+                                         style="width:80px;height:80px;">
+
+                                        <i class="fa-solid fa-user fs-2 text-secondary"></i>
+
+                                    </div>
+                                }
+
+                                @if (applicant.AIMatchScore.HasValue)
+                                {
+                                    <span class="badge @matchClass d-block">
+
+                                        @applicant.AIMatchScore% Match
+
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary d-block">
+                                        Match Pending
+                                    </span>
+                                }
+
+                            </div>
+
+
+                            <!-- Applicant Information -->
+                            <div class="col-md-7">
+
+                                <h5 class="fw-bold mb-1">
+
+                                    <a asp-controller="Employer"
+                                       asp-action="ApplicantDetails"
+                                       asp-route-id="@applicant.ApplicationId"
+                                       class="text-decoration-none">
+
+                                        @applicant.FullName
+
+                                    </a>
+
+                                </h5>
+
+
+                                <p class="text-muted mb-1">
+
+                                    @if (!string.IsNullOrWhiteSpace(
+                                        applicant.ExperienceLevel))
+                                    {
+                                        @applicant.ExperienceLevel
+                                    }
+                                    else
+                                    {
+                                        @:Applicant
+                                    }
+
+                                    @if (applicant.ExperienceYears.HasValue)
+                                    {
+                                        <span>
+                                            • @applicant.ExperienceYears years experience
+                                        </span>
+                                    }
+
+                                </p>
+
+
+                                <p class="text-muted small mb-2">
+
+                                    <i class="fa-solid fa-briefcase me-1"></i>
+
+                                    Applied for:
+                                    <strong>
+                                        @applicant.JobTitle
+                                    </strong>
+
+                                </p>
+
+
+                                <!-- Skills -->
+
+                                @if (!string.IsNullOrWhiteSpace(
+                                    applicant.Skills))
+                                {
+                                    <div class="d-flex flex-wrap gap-2 mb-2">
+
+                                        @foreach (var skill in applicant.Skills
+                                            .Split(
+                                                ',',
+                                                StringSplitOptions.RemoveEmptyEntries))
+                                        {
+                                            <span class="badge bg-light text-dark border">
+
+                                                @skill.Trim()
+
+                                            </span>
+                                        }
+
+                                    </div>
+                                }
+
+
+                                <small class="text-muted">
+
+                                    <i class="fa-solid fa-clock me-1"></i>
+
+                                    Applied
+                                    @applicant.ApplicationDate
+                                        .ToLocalTime()
+                                        .ToString("dd MMM yyyy")
+
+                                </small>
+
+                            </div>
+
+
+                            <!-- Actions -->
+                            <div class="col-md-3 text-end">
+
+                                <!-- View Applicant -->
+                                <a asp-controller="Employer"
+                                   asp-action="ApplicantDetails"
+                                   asp-route-id="@applicant.ApplicationId"
+                                   class="btn btn-primary btn-sm mb-2 w-100">
+
+                                    <i class="fa-solid fa-eye me-1"></i>
+                                    View Profile
+
+                                </a>
+
+
+                                <!-- Shortlist -->
+                                @if (applicant.Status !=
+                                    JobFinder.Models.Enums.ApplicationStatus.Shortlisted)
+                                {
+                                    <form asp-controller="Employer"
+                                          asp-action="ShortlistApplicant"
+                                          asp-route-id="@applicant.ApplicationId"
+                                          method="post"
+                                          class="mb-2">
+
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit"
+                                                class="btn btn-outline-success btn-sm w-100">
+
+                                            <i class="fa-solid fa-check me-1"></i>
+                                            Shortlist
+
+                                        </button>
+
+                                    </form>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-success btn-sm mb-2 w-100"
+                                            disabled>
+
+                                        <i class="fa-solid fa-check me-1"></i>
+                                        Shortlisted
+
+                                    </button>
+                                }
+
+
+                                <!-- Reject -->
+                                @if (applicant.Status !=
+                                    JobFinder.Models.Enums.ApplicationStatus.Rejected)
+                                {
+                                    <form asp-controller="Employer"
+                                          asp-action="RejectApplicant"
+                                          asp-route-id="@applicant.ApplicationId"
+                                          method="post"
+                                          class="mb-2">
+
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit"
+                                                class="btn btn-outline-danger btn-sm w-100">
+
+                                            <i class="fa-solid fa-times me-1"></i>
+                                            Reject
+
+                                        </button>
+
+                                    </form>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-danger btn-sm w-100"
+                                            disabled>
+
+                                        <i class="fa-solid fa-times me-1"></i>
+                                        Rejected
+
+                                    </button>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        }
+
     </div>
+
 </section>
 
+
 <style>
-.back-home-btn {
-    position: fixed;
-    top: 80px;
-    left: 20px;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-.back-home-btn.fade-out {
-    opacity: 0;
-    pointer-events: none;
-}
-.bg-gradient {
-    background: linear-gradient(135deg, #2563eb 0%, #22c1c3 100%);
-}
+
+    .back-home-btn {
+        position: fixed;
+        top: 80px;
+        left: 20px;
+        z-index: 1000;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .back-home-btn.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .bg-gradient {
+        background: linear-gradient(
+            135deg,
+            #2563eb 0%,
+            #22c1c3 100%
+        );
+    }
+
 </style>
 
+
 <script>
+
     // Fade out back button on scroll
-    window.addEventListener('scroll', function() {
-        const backBtn = document.querySelector('.back-home-btn');
-        const scrollPosition = window.scrollY;
-        
-        // Start fading after 100px scroll
+
+    window.addEventListener('scroll', function () {
+
+        const backBtn =
+            document.querySelector('.back-home-btn');
+
+        const scrollPosition =
+            window.scrollY;
+
         if (scrollPosition > 100) {
+
             backBtn.classList.add('fade-out');
-        } else {
-            backBtn.classList.remove('fade-out');
+
         }
+        else {
+
+            backBtn.classList.remove('fade-out');
+
+        }
+
     });
+
 </script>
+

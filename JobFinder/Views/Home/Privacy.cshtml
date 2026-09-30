@@ -1,6 +1,1229 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<style>
+    /* =========================================================
+       PRIVACY POLICY PAGE
+       ========================================================= */
+
+    .privacy-page {
+        background: #f8f9fc;
+        min-height: 100vh;
+        padding-bottom: 80px;
+    }
+
+    /* ---------------------------------------------------------
+       Hero
+       --------------------------------------------------------- */
+
+    .privacy-hero {
+        background: linear-gradient(135deg, #2b2344 0%, #3b2f63 100%);
+        color: #ffffff;
+        padding: 80px 20px 75px;
+        margin-bottom: 50px;
+    }
+
+    .privacy-hero-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .privacy-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .privacy-hero h1 {
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -1px;
+        margin-bottom: 18px;
+    }
+
+    .privacy-hero p {
+        max-width: 720px;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+
+    .privacy-updated {
+        display: inline-block;
+        margin-top: 25px;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.9rem;
+    }
+
+
+    /* ---------------------------------------------------------
+       Main Layout
+       --------------------------------------------------------- */
+
+    .privacy-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .privacy-layout {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: 45px;
+        align-items: start;
+    }
+
+
+    /* ---------------------------------------------------------
+       Table of Contents
+       --------------------------------------------------------- */
+
+    .privacy-sidebar {
+        position: sticky;
+        top: 30px;
+    }
+
+    .privacy-nav {
+        background: #ffffff;
+        border: 1px solid #e9e9ef;
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow: 0 5px 20px rgba(43, 35, 68, 0.05);
+    }
+
+    .privacy-nav-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #777;
+        margin-bottom: 15px;
+    }
+
+    .privacy-nav a {
+        display: block;
+        color: #555;
+        text-decoration: none;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        padding: 8px 10px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .privacy-nav a:hover {
+        background: #f3efff;
+        color: #7b39fc;
+    }
+
+
+    /* ---------------------------------------------------------
+       Policy Content
+       --------------------------------------------------------- */
+
+    .privacy-content {
+        background: #ffffff;
+        border: 1px solid #e9e9ef;
+        border-radius: 18px;
+        padding: 50px 55px;
+        box-shadow: 0 5px 25px rgba(43, 35, 68, 0.05);
+    }
+
+    .privacy-section {
+        padding: 0 0 42px;
+        margin-bottom: 42px;
+        border-bottom: 1px solid #eeeeF3;
+        scroll-margin-top: 30px;
+    }
+
+    .privacy-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .privacy-section h2 {
+        color: #2b2344;
+        font-size: 1.45rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+        letter-spacing: -0.2px;
+    }
+
+    .privacy-section h3 {
+        color: #3a3450;
+        font-size: 1.05rem;
+        font-weight: 650;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    .privacy-section p {
+        color: #5f6068;
+        font-size: 0.98rem;
+        line-height: 1.85;
+        margin-bottom: 15px;
+    }
+
+    .privacy-section ul {
+        margin: 15px 0 18px;
+        padding-left: 22px;
+    }
+
+    .privacy-section li {
+        color: #5f6068;
+        font-size: 0.96rem;
+        line-height: 1.8;
+        margin-bottom: 7px;
+        padding-left: 4px;
+    }
+
+    .privacy-section strong {
+        color: #3a3450;
+    }
+
+
+    /* ---------------------------------------------------------
+       Intro Notice
+       --------------------------------------------------------- */
+
+    .privacy-notice {
+        background: #f5f1ff;
+        border-left: 4px solid #7b39fc;
+        border-radius: 10px;
+        padding: 20px 22px;
+        margin-bottom: 38px;
+    }
+
+    .privacy-notice p {
+        margin: 0;
+        color: #51466c;
+    }
+
+
+    /* ---------------------------------------------------------
+       Information Cards
+       --------------------------------------------------------- */
+
+    .privacy-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin: 25px 0;
+    }
+
+    .privacy-card {
+        border: 1px solid #ececf1;
+        border-radius: 12px;
+        padding: 20px;
+        background: #fafafd;
+    }
+
+    .privacy-card-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: #eee8ff;
+        color: #7b39fc;
+        margin-bottom: 13px;
+    }
+
+    .privacy-card h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+    }
+
+    .privacy-card p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+
+
+    /* ---------------------------------------------------------
+       Contact Box
+       --------------------------------------------------------- */
+
+    .privacy-contact {
+        background: #2b2344;
+        color: #ffffff;
+        border-radius: 15px;
+        padding: 28px;
+        margin-top: 25px;
+    }
+
+    .privacy-contact h3 {
+        color: #ffffff;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .privacy-contact p {
+        color: rgba(255, 255, 255, 0.72);
+        margin-bottom: 8px;
+    }
+
+    .privacy-contact strong {
+        color: #ffffff;
+    }
+
+
+    /* ---------------------------------------------------------
+       Back to Top
+       --------------------------------------------------------- */
+
+    .privacy-back-top {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: #7b39fc;
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 600;
+        margin-top: 25px;
+    }
+
+    .privacy-back-top:hover {
+        color: #5f22d1;
+    }
+
+
+    /* ---------------------------------------------------------
+       Responsive
+       --------------------------------------------------------- */
+
+    @@media (max-width: 900px) {
+
+        .privacy-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .privacy-sidebar {
+            position: static;
+        }
+
+        .privacy-nav {
+            display: none;
+        }
+
+        .privacy-content {
+            padding: 40px 35px;
+        }
+    }
+
+    @@media (max-width: 600px) {
+
+        .privacy-hero {
+            padding: 55px 20px;
+            margin-bottom: 30px;
+        }
+
+        .privacy-container {
+            padding: 0 14px;
+        }
+
+        .privacy-content {
+            padding: 30px 22px;
+            border-radius: 14px;
+        }
+
+        .privacy-section {
+            padding-bottom: 32px;
+            margin-bottom: 32px;
+        }
+
+        .privacy-section h2 {
+            font-size: 1.3rem;
+        }
+
+        .privacy-section p,
+        .privacy-section li {
+            font-size: 0.94rem;
+        }
+
+        .privacy-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<div class="privacy-page" id="top">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="privacy-hero">
+
+        <div class="privacy-hero-inner">
+
+            <div class="privacy-label">
+                <i class="fa-solid fa-shield-halved"></i>
+                Privacy & Security
+            </div>
+
+            <h1>
+                Privacy Policy
+            </h1>
+
+            <p>
+                Your privacy matters to us. Learn how JobFinder
+                collects, uses, stores, and protects your information
+                when you use our platform.
+            </p>
+
+            <span class="privacy-updated">
+                Last updated: September 28, 2026
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <div class="privacy-container">
+
+        <div class="privacy-layout">
+
+
+            <!-- =================================================
+                 SIDEBAR / TABLE OF CONTENTS
+                 ================================================= -->
+
+            <aside class="privacy-sidebar">
+
+                <nav class="privacy-nav">
+
+                    <div class="privacy-nav-title">
+                        Contents
+                    </div>
+
+                    <a href="#introduction">
+                        Introduction
+                    </a>
+
+                    <a href="#information">
+                        Information We Collect
+                    </a>
+
+                    <a href="#usage">
+                        How We Use Information
+                    </a>
+
+                    <a href="#applicants">
+                        Applicant Information
+                    </a>
+
+                    <a href="#employers">
+                        Employer Information
+                    </a>
+
+                    <a href="#applications">
+                        Job Applications
+                    </a>
+
+                    <a href="#sharing">
+                        Information Sharing
+                    </a>
+
+                    <a href="#security">
+                        Data Security
+                    </a>
+
+                    <a href="#retention">
+                        Data Retention
+                    </a>
+
+                    <a href="#rights">
+                        Your Privacy Rights
+                    </a>
+
+                    <a href="#cookies">
+                        Cookies
+                    </a>
+
+                    <a href="#third-party">
+                        Third-Party Services
+                    </a>
+
+                    <a href="#children">
+                        Children's Privacy
+                    </a>
+
+                    <a href="#changes">
+                        Policy Changes
+                    </a>
+
+                    <a href="#contact">
+                        Contact Us
+                    </a>
+
+                </nav>
+
+            </aside>
+
+
+            <!-- =================================================
+                 POLICY CONTENT
+                 ================================================= -->
+
+            <main class="privacy-content">
+
+
+                <!-- INTRODUCTION -->
+
+                <section class="privacy-section"
+                         id="introduction">
+
+                    <h2>
+                        1. Introduction
+                    </h2>
+
+                    <div class="privacy-notice">
+
+                        <p>
+                            Welcome to <strong>JobFinder</strong>,
+                            a job-matching platform designed to connect
+                            job seekers with employers and help users
+                            discover, save, and apply for employment
+                            opportunities.
+                        </p>
+
+                    </div>
+
+                    <p>
+                        This Privacy Policy explains how JobFinder
+                        collects, uses, stores, protects, and shares
+                        information when you use our website,
+                        application, and related services.
+                    </p>
+
+                    <p>
+                        By using JobFinder, you acknowledge that you
+                        have read and understood this Privacy Policy.
+                    </p>
+
+                </section>
+
+
+                <!-- INFORMATION WE COLLECT -->
+
+                <section class="privacy-section"
+                         id="information">
+
+                    <h2>
+                        2. Information We Collect
+                    </h2>
+
+                    <p>
+                        Depending on how you use JobFinder, we may
+                        collect several categories of information.
+                    </p>
+
+
+                    <div class="privacy-cards">
+
+                        <div class="privacy-card">
+
+                            <div class="privacy-card-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <h3>
+                                Applicant Information
+                            </h3>
+
+                            <p>
+                                Name, email, phone number, location,
+                                skills, education, experience,
+                                resume, portfolio and profile
+                                information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="privacy-card">
+
+                            <div class="privacy-card-icon">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+
+                            <h3>
+                                Employer Information
+                            </h3>
+
+                            <p>
+                                Company information, contact details,
+                                company description, logo, job
+                                postings and recruitment information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="privacy-card">
+
+                            <div class="privacy-card-icon">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+
+                            <h3>
+                                Application Information
+                            </h3>
+
+                            <p>
+                                Applications, resumes, cover letters,
+                                application status and other
+                                recruitment-related information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="privacy-card">
+
+                            <div class="privacy-card-icon">
+                                <i class="fa-solid fa-laptop"></i>
+                            </div>
+
+                            <h3>
+                                Technical Information
+                            </h3>
+
+                            <p>
+                                Browser, device, operating system,
+                                access times, IP address and diagnostic
+                                information.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- HOW WE USE INFORMATION -->
+
+                <section class="privacy-section"
+                         id="usage">
+
+                    <h2>
+                        3. How We Use Your Information
+                    </h2>
+
+                    <p>
+                        JobFinder may use collected information to:
+                    </p>
+
+                    <ul>
+                        <li>Create and manage user accounts.</li>
+                        <li>Authenticate users and protect accounts.</li>
+                        <li>Maintain applicant and employer profiles.</li>
+                        <li>Allow applicants to search for jobs.</li>
+                        <li>Allow employers to publish job opportunities.</li>
+                        <li>Process and manage job applications.</li>
+                        <li>Allow applicants to save jobs.</li>
+                        <li>Allow employers to review applicants.</li>
+                        <li>Facilitate recruitment-related communication.</li>
+                        <li>Improve the functionality of JobFinder.</li>
+                        <li>Detect and prevent unauthorized activity.</li>
+                        <li>Maintain platform security.</li>
+                        <li>Respond to support requests.</li>
+                        <li>Comply with applicable legal requirements.</li>
+                    </ul>
+
+                </section>
+
+
+                <!-- APPLICANTS -->
+
+                <section class="privacy-section"
+                         id="applicants">
+
+                    <h2>
+                        4. Applicant Information
+                    </h2>
+
+                    <p>
+                        Applicant information is used to provide
+                        employment-related services through JobFinder.
+                    </p>
+
+                    <p>
+                        Information in an applicant's profile may be
+                        used by employers when evaluating applicants
+                        for jobs to which the applicant has applied.
+                    </p>
+
+                    <p>
+                        Information included in a submitted application,
+                        including a resume or cover letter, may be made
+                        available to the employer responsible for the
+                        relevant job posting.
+                    </p>
+
+                    <p>
+                        Applicants should only provide information
+                        that they are comfortable sharing for
+                        employment-related purposes.
+                    </p>
+
+                </section>
+
+
+                <!-- EMPLOYERS -->
+
+                <section class="privacy-section"
+                         id="employers">
+
+                    <h2>
+                        5. Employer Information
+                    </h2>
+
+                    <p>
+                        Employer information may be used to:
+                    </p>
+
+                    <ul>
+                        <li>Create and maintain employer profiles.</li>
+                        <li>Publish job vacancies.</li>
+                        <li>Manage job postings.</li>
+                        <li>Review applications.</li>
+                        <li>Communicate with applicants.</li>
+                        <li>Manage recruitment activities.</li>
+                    </ul>
+
+                    <p>
+                        Information associated with a job posting may
+                        be visible to applicants and other users as
+                        necessary to provide the job-search service.
+                    </p>
+
+                </section>
+
+
+                <!-- APPLICATIONS -->
+
+                <section class="privacy-section"
+                         id="applications">
+
+                    <h2>
+                        6. Job Applications
+                    </h2>
+
+                    <p>
+                        When you apply for a job through JobFinder,
+                        information associated with your application
+                        may be stored and made available to the employer
+                        responsible for the relevant job posting.
+                    </p>
+
+                    <h3>
+                        This may include:
+                    </h3>
+
+                    <ul>
+                        <li>Your name.</li>
+                        <li>Contact information.</li>
+                        <li>Professional profile.</li>
+                        <li>Skills and education.</li>
+                        <li>Professional experience.</li>
+                        <li>Resume or CV.</li>
+                        <li>Cover letter.</li>
+                        <li>Application date.</li>
+                        <li>Application status.</li>
+                        <li>Other information you voluntarily provide.</li>
+                    </ul>
+
+                    <p>
+                        Once information has been submitted to an
+                        employer, the employer may process that
+                        information according to its own privacy
+                        practices and applicable laws.
+                    </p>
+
+                </section>
+
+
+                <!-- SAVED JOBS -->
+
+                <section class="privacy-section">
+
+                    <h2>
+                        7. Saved Jobs
+                    </h2>
+
+                    <p>
+                        JobFinder allows applicants to save jobs for
+                        later consideration.
+                    </p>
+
+                    <p>
+                        When you save a job, JobFinder may store your
+                        applicant account, the job you saved, and the
+                        date the job was saved.
+                    </p>
+
+                    <p>
+                        Saved jobs are associated with your account and
+                        are intended to be accessible through your
+                        applicant dashboard.
+                    </p>
+
+                </section>
+
+
+                <!-- SHARING -->
+
+                <section class="privacy-section"
+                         id="sharing">
+
+                    <h2>
+                        8. Information Sharing
+                    </h2>
+
+                    <p>
+                        JobFinder does not intend to sell users'
+                        personal information as a commercial product.
+                    </p>
+
+                    <h3>
+                        Applicants and Employers
+                    </h3>
+
+                    <p>
+                        Information may be shared between applicants
+                        and employers when necessary to provide
+                        recruitment functionality.
+                    </p>
+
+                    <h3>
+                        Service Providers
+                    </h3>
+
+                    <p>
+                        We may use third-party service providers that
+                        help operate, maintain, secure, or improve
+                        JobFinder. These providers may process
+                        information only as necessary to provide their
+                        services to the platform.
+                    </p>
+
+                    <h3>
+                        Legal Requirements
+                    </h3>
+
+                    <p>
+                        Information may be disclosed when required by
+                        applicable law, regulation, legal process,
+                        court order, or governmental request.
+                    </p>
+
+                    <h3>
+                        Security and Protection
+                    </h3>
+
+                    <p>
+                        Information may also be disclosed when
+                        reasonably necessary to investigate fraud,
+                        security incidents, unauthorized access,
+                        abuse, or other activity that could harm
+                        JobFinder, its users, or others.
+                    </p>
+
+                </section>
+
+
+                <!-- SECURITY -->
+
+                <section class="privacy-section"
+                         id="security">
+
+                    <h2>
+                        9. Data Security
+                    </h2>
+
+                    <p>
+                        We take reasonable measures to protect
+                        information stored and processed through
+                        JobFinder.
+                    </p>
+
+                    <ul>
+                        <li>Authentication controls.</li>
+                        <li>Password protection.</li>
+                        <li>Role-based access controls.</li>
+                        <li>Database security.</li>
+                        <li>Authorization checks.</li>
+                        <li>Protection against unauthorized access.</li>
+                        <li>Secure application development practices.</li>
+                    </ul>
+
+                    <p>
+                        However, no internet-based system can guarantee
+                        absolute security. Users should take appropriate
+                        precautions when creating accounts and submitting
+                        personal information online.
+                    </p>
+
+                </section>
+
+
+                <!-- RETENTION -->
+
+                <section class="privacy-section"
+                         id="retention">
+
+                    <h2>
+                        10. Data Retention
+                    </h2>
+
+                    <p>
+                        We retain information for as long as reasonably
+                        necessary to:
+                    </p>
+
+                    <ul>
+                        <li>Provide JobFinder services.</li>
+                        <li>Maintain user accounts.</li>
+                        <li>Process applications.</li>
+                        <li>Maintain recruitment records.</li>
+                        <li>Resolve disputes.</li>
+                        <li>Enforce agreements.</li>
+                        <li>Comply with legal obligations.</li>
+                    </ul>
+
+                    <p>
+                        Retention periods may vary depending on the type
+                        of information and the reason it was collected.
+                    </p>
+
+                </section>
+
+
+                <!-- RIGHTS -->
+
+                <section class="privacy-section"
+                         id="rights">
+
+                    <h2>
+                        11. Your Privacy Choices and Rights
+                    </h2>
+
+                    <p>
+                        Depending on applicable law, you may have
+                        rights concerning your personal information.
+                    </p>
+
+                    <ul>
+                        <li>Access information associated with your account.</li>
+                        <li>Correct inaccurate information.</li>
+                        <li>Update your profile.</li>
+                        <li>Request deletion of certain information.</li>
+                        <li>Withdraw certain permissions or consents.</li>
+                        <li>Ask questions about how your information is processed.</li>
+                    </ul>
+
+                    <p>
+                        Some information may need to be retained where
+                        required by law or where necessary for legitimate
+                        operational or legal purposes.
+                    </p>
+
+                </section>
+
+
+                <!-- ACCOUNT SECURITY -->
+
+                <section class="privacy-section">
+
+                    <h2>
+                        12. Account Security
+                    </h2>
+
+                    <p>
+                        You are responsible for keeping your JobFinder
+                        login credentials confidential.
+                    </p>
+
+                    <ul>
+                        <li>Use a strong password.</li>
+                        <li>Avoid sharing your password.</li>
+                        <li>Log out when using a shared device.</li>
+                        <li>Notify JobFinder if you believe your account has been compromised.</li>
+                    </ul>
+
+                </section>
+
+
+                <!-- COOKIES -->
+
+                <section class="privacy-section"
+                         id="cookies">
+
+                    <h2>
+                        13. Cookies and Similar Technologies
+                    </h2>
+
+                    <p>
+                        JobFinder may use cookies or similar technologies
+                        where necessary to:
+                    </p>
+
+                    <ul>
+                        <li>Maintain authentication sessions.</li>
+                        <li>Remember user preferences.</li>
+                        <li>Maintain application functionality.</li>
+                        <li>Improve platform performance.</li>
+                        <li>Understand general platform usage.</li>
+                    </ul>
+
+                    <p>
+                        You may be able to control cookies through your
+                        browser settings. Disabling certain cookies may
+                        affect some functionality of the platform.
+                    </p>
+
+                </section>
+
+
+                <!-- THIRD PARTY -->
+
+                <section class="privacy-section"
+                         id="third-party">
+
+                    <h2>
+                        14. Third-Party Websites and Services
+                    </h2>
+
+                    <p>
+                        JobFinder may contain links to external websites,
+                        including employer websites or portfolio links
+                        provided by users.
+                    </p>
+
+                    <p>
+                        JobFinder is not responsible for the privacy
+                        practices, security, or content of third-party
+                        websites.
+                    </p>
+
+                    <p>
+                        We encourage users to review the privacy policies
+                        of external websites before providing them with
+                        personal information.
+                    </p>
+
+                </section>
+
+
+                <!-- CHILDREN -->
+
+                <section class="privacy-section"
+                         id="children">
+
+                    <h2>
+                        15. Children's Privacy
+                    </h2>
+
+                    <p>
+                        JobFinder is intended for individuals who are
+                        legally able to use employment and recruitment
+                        services.
+                    </p>
+
+                    <p>
+                        We do not knowingly collect personal information
+                        from children in violation of applicable laws.
+                    </p>
+
+                    <p>
+                        If you believe that a child has provided personal
+                        information to JobFinder without appropriate
+                        authorization, please contact the platform
+                        administrators.
+                    </p>
+
+                </section>
+
+
+                <!-- EMPLOYER RESPONSIBILITIES -->
+
+                <section class="privacy-section">
+
+                    <h2>
+                        16. Employer Responsibilities
+                    </h2>
+
+                    <p>
+                        Employers using JobFinder are responsible for
+                        handling applicant information appropriately.
+                    </p>
+
+                    <ul>
+                        <li>Use applicant information only for legitimate recruitment purposes.</li>
+                        <li>Protect applicant information from unauthorized access.</li>
+                        <li>Avoid unnecessary disclosure of applicant information.</li>
+                        <li>Comply with applicable privacy and employment laws.</li>
+                        <li>Securely dispose of applicant information when appropriate.</li>
+                    </ul>
+
+                </section>
+
+
+                <!-- APPLICANT RESPONSIBILITIES -->
+
+                <section class="privacy-section">
+
+                    <h2>
+                        17. Applicant Responsibilities
+                    </h2>
+
+                    <p>
+                        Applicants are responsible for ensuring that
+                        information submitted to JobFinder is accurate
+                        and appropriate.
+                    </p>
+
+                    <p>
+                        Applicants should avoid submitting passwords,
+                        financial account credentials, unnecessary
+                        sensitive personal information, or information
+                        belonging to another person without authorization.
+                    </p>
+
+                </section>
+
+
+                <!-- CHANGES -->
+
+                <section class="privacy-section"
+                         id="changes">
+
+                    <h2>
+                        18. Changes to This Privacy Policy
+                    </h2>
+
+                    <p>
+                        We may update this Privacy Policy from time to
+                        time to reflect changes in JobFinder's
+                        functionality, data-processing practices,
+                        security practices, applicable laws, or
+                        operational requirements.
+                    </p>
+
+                    <p>
+                        When changes are made, the updated version will
+                        be posted on the JobFinder platform and the
+                        "Last Updated" date will be revised.
+                    </p>
+
+                    <p>
+                        Your continued use of JobFinder after an updated
+                        Privacy Policy is posted constitutes acknowledgment
+                        of the updated policy to the extent permitted by
+                        applicable law.
+                    </p>
+
+                </section>
+
+
+                <!-- CONTACT -->
+
+                <section class="privacy-section"
+                         id="contact">
+
+                    <h2>
+                        19. Contact Us
+                    </h2>
+
+                    <p>
+                        If you have questions, concerns, or requests
+                        regarding this Privacy Policy or the handling
+                        of your personal information, please contact
+                        the JobFinder administrators.
+                    </p>
+
+
+                    <div class="privacy-contact">
+
+                        <h3>
+                            <i class="fa-solid fa-envelope me-2"></i>
+                            JobFinder
+                        </h3>
+
+                        <p>
+                            <strong>Email:</strong>
+                            [Insert your official JobFinder support email]
+                        </p>
+
+                        <p>
+                            <strong>Website:</strong>
+                            [Insert your JobFinder website]
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            Ghana
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACCEPTANCE -->
+
+                <section class="privacy-section">
+
+                    <h2>
+                        20. Acceptance
+                    </h2>
+
+                    <p>
+                        By creating an account or using JobFinder,
+                        you acknowledge that you have reviewed this
+                        Privacy Policy and understand how information
+                        may be collected, used, stored, and shared in
+                        connection with the JobFinder platform.
+                    </p>
+
+                </section>
+
+
+                <!-- BACK TO TOP -->
+
+                <a href="#top"
+                   class="privacy-back-top">
+
+                    <i class="fa-solid fa-arrow-up"></i>
+                    Back to top
+
+                </a>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</div>

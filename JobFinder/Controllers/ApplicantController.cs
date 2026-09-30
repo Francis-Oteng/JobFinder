@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static JobFinder.Models.Enums;
-using static System.Net.Mime.MediaTypeNames;
 using Application = JobFinder.Models.Application;
 
 namespace JobFinder.Controllers
@@ -77,13 +76,15 @@ namespace JobFinder.Controllers
                         .OrderByDescending(
                             a => a.ApplicationDate)
                         .Take(5)
-                       .Select(a => new RecentApplicationRow 
-                       { ApplicationId = a.ApplicationId,
-                           JobId = a.JobId, 
-                           JobTitle = a.Job.Title,
-                           CompanyName = a.Job.Employer.CompanyName, 
-                           Status = a.Status, 
-                           ApplicationDate = a.ApplicationDate })
+                        .Select(a => new RecentApplicationRow
+                        {
+                            ApplicationId = a.ApplicationId,
+                            JobId = a.JobId,
+                            JobTitle = a.Job.Title,
+                            CompanyName = a.Job.Employer.CompanyName,
+                            Status = a.Status,
+                            ApplicationDate = a.ApplicationDate
+                        })
                         .ToList()
             };
 
@@ -177,7 +178,6 @@ namespace JobFinder.Controllers
 
             user.FullName = model.FullName;
 
-            // Update email and username if email changed
             if (!string.Equals(
                 user.Email,
                 model.Email,
@@ -318,36 +318,46 @@ namespace JobFinder.Controllers
                 return NotFound(
                     "Applicant profile not found.");
 
-            // -----------------------------------------
-            // Get available jobs
-            // -----------------------------------------
+            // ---------------------------------------------------------
+            // BASE JOB QUERY
+            //
+            // Only jobs that:
+            // 1. Are Active
+            // 2. Have not passed their closing date
+            // ---------------------------------------------------------
 
             var query = _context.Jobs
+                .AsNoTracking()
                 .Include(j => j.Employer)
+                .Where(j =>
+                    j.Status == JobStatus.Active &&
+                    j.ClosingDate >= DateTime.UtcNow)
                 .AsQueryable();
 
-            // Only show jobs that have not closed
-            query = query.Where(
-                j => j.ClosingDate >= DateTime.UtcNow);
-
-            // -----------------------------------------
-            // Search
-            // -----------------------------------------
+            // ---------------------------------------------------------
+            // SEARCH
+            // ---------------------------------------------------------
 
             if (!string.IsNullOrWhiteSpace(search))
             {
                 search = search.Trim();
 
                 query = query.Where(j =>
-                    j.Title.Contains(search)
-                    || j.Description.Contains(search)
-                    || j.Category.Contains(search)
-                    || j.Employer.CompanyName.Contains(search));
+                    j.Title.Contains(search) ||
+                    j.Description.Contains(search) ||
+                    (j.Category != null &&
+                     j.Category.Contains(search)) ||
+                    j.Location.Contains(search) ||
+                    j.Employer.CompanyName.Contains(search) ||
+                    (j.RequiredSkills != null &&
+                     j.RequiredSkills.Contains(search)) ||
+                    (j.Requirements != null &&
+                     j.Requirements.Contains(search)));
             }
 
-            // -----------------------------------------
-            // Job type filter
-            // -----------------------------------------
+            // ---------------------------------------------------------
+            // JOB TYPE FILTER
+            // ---------------------------------------------------------
 
             if (jobType.HasValue)
             {
@@ -355,33 +365,34 @@ namespace JobFinder.Controllers
                     j => j.JobType == jobType.Value);
             }
 
-            // -----------------------------------------
-            // Location filter
-            // -----------------------------------------
+            // ---------------------------------------------------------
+            // LOCATION FILTER
+            // ---------------------------------------------------------
 
             if (!string.IsNullOrWhiteSpace(location))
             {
                 location = location.Trim();
 
-                query = query.Where(
-                    j => j.Location.Contains(location));
+                query = query.Where(j =>
+                    j.Location.Contains(location));
             }
 
-            // -----------------------------------------
-            // Category filter
-            // -----------------------------------------
+            // ---------------------------------------------------------
+            // CATEGORY FILTER
+            // ---------------------------------------------------------
 
             if (!string.IsNullOrWhiteSpace(category))
             {
                 category = category.Trim();
 
-                query = query.Where(
-                    j => j.Category.Contains(category));
+                query = query.Where(j =>
+                    j.Category != null &&
+                    j.Category.Contains(category));
             }
 
-            // -----------------------------------------
-            // Build job list
-            // -----------------------------------------
+            // ---------------------------------------------------------
+            // GET JOBS
+            // ---------------------------------------------------------
 
             var jobs = await query
                 .OrderByDescending(
@@ -394,19 +405,26 @@ namespace JobFinder.Controllers
 
                     Description = j.Description,
 
-                    Category = j.Category,
+                    Category =
+                        j.Category ?? string.Empty,
 
-                    Location = j.Location,
+                    Location =
+                        j.Location,
 
-                    JobType = j.JobType,
+                    JobType =
+                        j.JobType,
 
-                    SalaryMin = j.SalaryMin,
+                    SalaryMin =
+                        j.SalaryMin,
 
-                    SalaryMax = j.SalaryMax,
+                    SalaryMax =
+                        j.SalaryMax,
 
-                    PostedDate = j.PostedDate,
+                    PostedDate =
+                        j.PostedDate,
 
-                    ClosingDate = (DateTime)j.ClosingDate,
+                    ClosingDate =
+                        (DateTime)j.ClosingDate,
 
                     CompanyName =
                         j.Employer.CompanyName,
@@ -419,16 +437,22 @@ namespace JobFinder.Controllers
                             s =>
                                 s.ApplicantId ==
                                 applicant.ApplicantId
-                                && s.JobId == j.JobId),
+                                &&
+                                s.JobId == j.JobId),
 
                     HasApplied =
                         _context.Applications.Any(
                             a =>
                                 a.ApplicantId ==
                                 applicant.ApplicantId
-                                && a.JobId == j.JobId)
+                                &&
+                                a.JobId == j.JobId)
                 })
                 .ToListAsync();
+
+            // ---------------------------------------------------------
+            // BUILD VIEW MODEL
+            // ---------------------------------------------------------
 
             var model = new ApplicantJobsViewModel
             {
@@ -468,36 +492,53 @@ namespace JobFinder.Controllers
                 return NotFound(
                     "Applicant profile not found.");
 
+            // Only allow applicants to view active,
+            // non-expired job postings.
+
             var job = await _context.Jobs
+                .AsNoTracking()
                 .Include(j => j.Employer)
                 .FirstOrDefaultAsync(
-                    j => j.JobId == id);
+                    j =>
+                        j.JobId == id &&
+                        j.Status == JobStatus.Active &&
+                        j.ClosingDate >= DateTime.UtcNow);
 
             if (job == null)
                 return NotFound(
-                    "Job not found.");
+                    "Job not found or this job is no longer available.");
 
             var model = new JobDetailsViewModel
             {
-                JobId = job.JobId,
+                JobId =
+                    job.JobId,
 
-                Title = job.Title,
+                Title =
+                    job.Title,
 
-                Description = job.Description,
+                Description =
+                    job.Description,
 
-                Category = job.Category,
+                Category =
+                    job.Category,
 
-                Location = job.Location,
+                Location =
+                    job.Location,
 
-                JobType = job.JobType,
+                JobType =
+                    job.JobType,
 
-                SalaryMin = job.SalaryMin,
+                SalaryMin =
+                    job.SalaryMin,
 
-                SalaryMax = job.SalaryMax,
+                SalaryMax =
+                    job.SalaryMax,
 
-                PostedDate = job.PostedDate,
+                PostedDate =
+                    job.PostedDate,
 
-                ClosingDate = (DateTime)job.ClosingDate,
+                ClosingDate =
+                    (DateTime)job.ClosingDate,
 
                 CompanyName =
                     job.Employer.CompanyName,
@@ -516,14 +557,16 @@ namespace JobFinder.Controllers
                         s =>
                             s.ApplicantId ==
                             applicant.ApplicantId
-                            && s.JobId == job.JobId),
+                            &&
+                            s.JobId == job.JobId),
 
                 HasApplied =
                     await _context.Applications.AnyAsync(
                         a =>
                             a.ApplicantId ==
                             applicant.ApplicantId
-                            && a.JobId == job.JobId)
+                            &&
+                            a.JobId == job.JobId)
             };
 
             return View(model);
@@ -552,17 +595,23 @@ namespace JobFinder.Controllers
                 return NotFound(
                     "Applicant profile not found.");
 
+            // ---------------------------------------------------------
+            // Get active job
+            // ---------------------------------------------------------
+
             var job = await _context.Jobs
                 .FirstOrDefaultAsync(
-                    j => j.JobId == jobId);
+                    j =>
+                        j.JobId == jobId &&
+                        j.Status == JobStatus.Active);
 
             if (job == null)
                 return NotFound(
-                    "Job not found.");
+                    "Job not found or this job is no longer available.");
 
-            // -----------------------------------------
+            // ---------------------------------------------------------
             // Check application deadline
-            // -----------------------------------------
+            // ---------------------------------------------------------
 
             if (job.ClosingDate < DateTime.UtcNow)
             {
@@ -574,16 +623,17 @@ namespace JobFinder.Controllers
                     new { id = jobId });
             }
 
-            // -----------------------------------------
+            // ---------------------------------------------------------
             // Check duplicate application
-            // -----------------------------------------
+            // ---------------------------------------------------------
 
             var alreadyApplied =
                 await _context.Applications.AnyAsync(
                     a =>
                         a.ApplicantId ==
                         applicant.ApplicantId
-                        && a.JobId == jobId);
+                        &&
+                        a.JobId == jobId);
 
             if (alreadyApplied)
             {
@@ -595,9 +645,9 @@ namespace JobFinder.Controllers
                     new { id = jobId });
             }
 
-            // -----------------------------------------
+            // ---------------------------------------------------------
             // Create application
-            // -----------------------------------------
+            // ---------------------------------------------------------
 
             var application = new Application
             {
@@ -668,7 +718,8 @@ namespace JobFinder.Controllers
                         s =>
                             s.ApplicantId ==
                             applicant.ApplicantId
-                            && s.JobId == jobId);
+                            &&
+                            s.JobId == jobId);
 
             // -----------------------------------------
             // Remove saved job

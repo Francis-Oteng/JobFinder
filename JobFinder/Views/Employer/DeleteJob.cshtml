@@ -1,0 +1,168 @@
+﻿@model JobFinder.Models.Job
+
+@using static JobFinder.Models.Enums
+
+@{
+    ViewData["Title"] = "Delete Job";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <!-- Back -->
+            <div class="mb-4">
+                <a asp-controller="Employer"
+                   asp-action="JobDetails"
+                   asp-route-id="@Model.JobId"
+                   class="text-decoration-none">
+                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    Back to Job Details
+                </a>
+            </div>
+
+
+            <!-- Delete card -->
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-5 text-center">
+
+                    <div class="mb-4">
+
+                        <div class="mx-auto d-flex align-items-center justify-content-center rounded-circle"
+                             style="width: 80px; height: 80px; background: #fff1f2;">
+
+                            <i class="fa-solid fa-trash text-danger fs-3"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <h2 class="fw-bold mb-3">
+                        Delete Job Posting?
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        Are you sure you want to permanently delete this job posting?
+                        This action cannot be undone.
+                    </p>
+
+
+                    <!-- Job summary -->
+                    <div class="bg-light rounded-3 p-4 text-start mb-4">
+
+                        <h5 class="fw-bold mb-3">
+                            @Model.Title
+                        </h5>
+
+                        <div class="row g-3">
+
+                            <div class="col-sm-6">
+
+                                <div class="text-muted small">
+                                    Category
+                                </div>
+
+                                <div class="fw-semibold">
+                                    @(Model.Category ?? "Not specified")
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="text-muted small">
+                                    Location
+                                </div>
+
+                                <div class="fw-semibold">
+                                    @(Model.Location ?? "Not specified")
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="text-muted small">
+                                    Status
+                                </div>
+
+                                <div class="fw-semibold">
+                                    @Model.Status
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="text-muted small">
+                                    Applications
+                                </div>
+
+                                <div class="fw-semibold">
+                                    @Model.Applications.Count
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    @if (Model.Applications.Any())
+                    {
+                        <div class="alert alert-warning text-start">
+
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+
+                            <strong>Warning:</strong>
+                            This job has
+                            <strong>@Model.Applications.Count</strong>
+                            application(s). Deleting the job may also affect
+                            the applications associated with it, depending on
+                            your database relationship configuration.
+
+                        </div>
+                    }
+
+
+                    <!-- Delete form -->
+                    <form asp-controller="Employer"
+                          asp-action="DeleteJobConfirmed"
+                          asp-route-id="@Model.JobId"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+
+                            <a asp-controller="Employer"
+                               asp-action="JobDetails"
+                               asp-route-id="@Model.JobId"
+                               class="btn btn-outline-secondary px-4">
+                                Cancel
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4">
+                                <i class="fa-solid fa-trash me-2"></i>
+                                Yes, Delete Job
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

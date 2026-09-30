@@ -1,0 +1,663 @@
+﻿@model JobFinder.Models.ViewModels.ApplicantDetailsViewModel
+@using static JobFinder.Models.Enums
+
+@{
+    ViewData["Title"] = "Applicant Details";
+
+    var status = Model.Status.ToString();
+
+    var statusClass = status switch
+    {
+        "Pending" => "bg-warning text-dark",
+        "Submitted" => "bg-primary",
+        "Shortlisted" => "bg-success",
+        "Rejected" => "bg-danger",
+        "Withdrawn" => "bg-secondary",
+        "Interview" => "bg-info text-dark",
+        _ => "bg-secondary"
+    };
+}
+
+<div class="container-fluid">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <a asp-controller="Employer"
+               asp-action="JobApplicants"
+               asp-route-id="@Model.JobId"
+               class="text-decoration-none text-muted small">
+
+                <i class="fa-solid fa-arrow-left me-1"></i>
+                Back to Applicants
+            </a>
+
+            <h2 class="mt-2 mb-1">
+                Applicant Details
+            </h2>
+
+            <p class="text-muted mb-0">
+                Application for @Model.JobTitle
+            </p>
+        </div>
+
+        <span class="badge @statusClass fs-6">
+            @status
+        </span>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- LEFT COLUMN -->
+        <div class="col-lg-8">
+
+            <!-- Applicant Profile -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center">
+
+                        <!-- Profile Photo -->
+                        @if (!string.IsNullOrWhiteSpace(Model.PhotoUrl))
+                        {
+                            <img src="@Model.PhotoUrl"
+                                 alt="@Model.FullName"
+                                 class="rounded-circle me-4"
+                                 style="width:90px;height:90px;object-fit:cover;">
+                        }
+                        else
+                        {
+                            <div class="rounded-circle bg-primary text-white
+                                        d-flex align-items-center justify-content-center
+                                        me-4"
+                                 style="width:90px;height:90px;font-size:32px;">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.FullName))
+                                {
+                                    @Model.FullName.Substring(0, 1).ToUpper()
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-user"></i>
+                                }
+
+                            </div>
+                        }
+
+                        <div>
+
+                            <h3 class="mb-1">
+                                @Model.FullName
+                            </h3>
+
+                            <p class="text-muted mb-1">
+                                <i class="fa-solid fa-envelope me-2"></i>
+                                @Model.Email
+                            </p>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+                            {
+                                <p class="text-muted mb-1">
+                                    <i class="fa-solid fa-phone me-2"></i>
+                                    @Model.PhoneNumber
+                                </p>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Location))
+                            {
+                                <p class="text-muted mb-0">
+                                    <i class="fa-solid fa-location-dot me-2"></i>
+                                    @Model.Location
+                                </p>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- About -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        About the Applicant
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Bio))
+                    {
+                        <p class="mb-0">
+                            @Model.Bio
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">
+                            No biography has been provided.
+                        </p>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- Skills -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Skills
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Skills))
+                    {
+                        foreach (var skill in Model.Skills.Split(','))
+                        {
+                            <span class="badge bg-light text-dark border me-2 mb-2 px-3 py-2">
+                                @skill.Trim()
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted">
+                            No skills provided.
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- Education & Experience -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Education & Experience
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="text-muted small mb-1">
+                                Education
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Education))
+                            {
+                                <div class="fw-semibold">
+                                    @Model.Education
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Not provided
+                                </span>
+                            }
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="text-muted small mb-1">
+                                Experience Level
+                            </div>
+
+                            @if (Model.ExperienceLevel.HasValue)
+                            {
+                                <div class="fw-semibold">
+                                    @Model.ExperienceLevel
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Not provided
+                                </span>
+                            }
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Years of Experience
+                            </div>
+
+                            @if (Model.ExperienceYears.HasValue)
+                            {
+                                <div class="fw-semibold">
+                                    @Model.ExperienceYears years
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Not provided
+                                </span>
+                            }
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Certifications
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Certifications))
+                            {
+                                <div class="fw-semibold">
+                                    @Model.Certifications
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Not provided
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Cover Letter -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Cover Letter
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    @if (!string.IsNullOrWhiteSpace(Model.CoverLetter))
+                    {
+                        <div style="white-space: pre-line;">
+                            @Model.CoverLetter
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">
+                            No cover letter was submitted.
+                        </p>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- Employer Notes -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Employer Notes
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <textarea class="form-control"
+                              rows="5"
+                              placeholder="Add private notes about this applicant...">@Model.EmployerNotes</textarea>
+
+                    <small class="text-muted d-block mt-2">
+                        These notes are private and are not visible to the applicant.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+        <div class="col-lg-4">
+
+            <!-- Application Summary -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Application
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-3">
+
+                        <div class="text-muted small">
+                            Position
+                        </div>
+
+                        <div class="fw-semibold">
+                            @Model.JobTitle
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <div class="text-muted small">
+                            Applied
+                        </div>
+
+                        <div class="fw-semibold">
+                            @Model.ApplicationDate.ToString("MMM d, yyyy")
+                        </div>
+
+                        <small class="text-muted">
+                            @Model.ApplicationDate.ToString("hh:mm tt")
+                        </small>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <div class="text-muted small">
+                            Application Status
+                        </div>
+
+                        <span class="badge @statusClass mt-1">
+                            @status
+                        </span>
+
+                    </div>
+
+
+                    <!-- AI Match -->
+                    <div class="mb-3">
+
+                        <div class="d-flex justify-content-between">
+
+                            <span class="text-muted small">
+                                AI Match Score
+                            </span>
+
+                            <strong>
+                                @(Model.AIMatchScore.HasValue
+                                    ? $"{Model.AIMatchScore}%"
+                                    : "Pending")
+                            </strong>
+
+                        </div>
+
+                        @if (Model.AIMatchScore.HasValue)
+                        {
+                            <div class="progress mt-2"
+                                 style="height:8px;">
+
+                                <div class="progress-bar"
+                                     role="progressbar"
+                                     style="width:@Model.AIMatchScore%;"
+                                     aria-valuenow="@Model.AIMatchScore"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Application Actions -->
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Application Actions
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <!-- Resume -->
+                    @if (!string.IsNullOrWhiteSpace(Model.ResumeUrl))
+                    {
+                        <a href="@Model.ResumeUrl"
+                           target="_blank"
+                           class="btn btn-outline-primary w-100 mb-2">
+
+                            <i class="fa-solid fa-file-pdf me-2"></i>
+                            View Resume
+
+                        </a>
+                    }
+
+
+                    <!-- Portfolio -->
+                    @if (!string.IsNullOrWhiteSpace(Model.PortfolioUrl))
+                    {
+                        <a href="@Model.PortfolioUrl"
+                           target="_blank"
+                           class="btn btn-outline-secondary w-100 mb-2">
+
+                            <i class="fa-solid fa-globe me-2"></i>
+                            View Portfolio
+
+                        </a>
+                    }
+
+
+                    <hr />
+
+
+                    <!-- ========================================= -->
+                    <!-- SUBMITTED / PENDING APPLICATION -->
+                    <!-- ========================================= -->
+
+                    @if (Model.Status == ApplicationStatus.Submitted ||
+                         Model.Status == ApplicationStatus.Pending)
+                    {
+                        <!-- SHORTLIST -->
+                        <form asp-controller="Employer"
+                              asp-action="ShortlistApplicant"
+                              asp-route-id="@Model.ApplicationId"
+                              method="post"
+                              onsubmit="return confirm('Are you sure you want to shortlist this applicant?');">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-success w-100 mb-2">
+
+                                <i class="fa-solid fa-check me-2"></i>
+                                Shortlist Applicant
+
+                            </button>
+
+                        </form>
+
+
+                        <!-- REJECT -->
+                        <form asp-controller="Employer"
+                              asp-action="RejectApplicant"
+                              asp-route-id="@Model.ApplicationId"
+                              method="post"
+                              onsubmit="return confirm('Are you sure you want to reject this applicant?');">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-danger w-100 mb-2">
+
+                                <i class="fa-solid fa-xmark me-2"></i>
+                                Reject Applicant
+
+                            </button>
+
+                        </form>
+                    }
+
+
+                    <!-- ========================================= -->
+                    <!-- SHORTLISTED APPLICATION -->
+                    <!-- ========================================= -->
+
+                    @if (Model.Status == ApplicationStatus.Shortlisted)
+                    {
+                        <!-- REMOVE FROM SHORTLIST -->
+                        <form asp-controller="Employer"
+                              asp-action="RemoveFromShortlist"
+                              asp-route-id="@Model.ApplicationId"
+                              method="post"
+                              onsubmit="return confirm('Remove this applicant from the shortlist?');">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-warning w-100 mb-2">
+
+                                <i class="fa-solid fa-user-minus me-2"></i>
+                                Remove from Shortlist
+
+                            </button>
+
+                        </form>
+
+
+                        <!-- SCHEDULE INTERVIEW -->
+                        <a asp-controller="Employer"
+                           asp-action="ScheduleInterview"
+                           asp-route-id="@Model.ApplicationId"
+                           class="btn btn-dark w-100 mb-2">
+
+                            <i class="fa-solid fa-calendar-days me-2"></i>
+                            Schedule Interview
+
+                        </a>
+
+
+                        <!-- REJECT -->
+                        <form asp-controller="Employer"
+                              asp-action="RejectApplicant"
+                              asp-route-id="@Model.ApplicationId"
+                              method="post"
+                              onsubmit="return confirm('Are you sure you want to reject this shortlisted applicant?');">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-outline-danger w-100 mb-2">
+
+                                <i class="fa-solid fa-xmark me-2"></i>
+                                Reject Applicant
+
+                            </button>
+
+                        </form>
+                    }
+
+
+                    <!-- ========================================= -->
+                    <!-- INTERVIEW APPLICATION -->
+                    <!-- ========================================= -->
+
+                    @if (Model.Status == ApplicationStatus.Interview)
+                    {
+                        <div class="alert alert-info mb-2">
+
+                            <i class="fa-solid fa-calendar-check me-2"></i>
+
+                            <strong>Interview Scheduled</strong>
+
+                            <div class="small mt-1">
+                                This applicant has progressed to the interview stage.
+                            </div>
+
+                        </div>
+                    }
+
+
+                    <!-- ========================================= -->
+                    <!-- REJECTED -->
+                    <!-- ========================================= -->
+
+                    @if (Model.Status == ApplicationStatus.Rejected)
+                    {
+                        <div class="alert alert-danger mb-0">
+
+                            <i class="fa-solid fa-circle-xmark me-2"></i>
+
+                            <strong>Application Rejected</strong>
+
+                            <div class="small mt-1">
+                                No further actions are available for this application.
+                            </div>
+
+                        </div>
+                    }
+
+
+                    <!-- ========================================= -->
+                    <!-- WITHDRAWN -->
+                    <!-- ========================================= -->
+
+                    @if (Model.Status == ApplicationStatus.Withdrawn)
+                    {
+                        <div class="alert alert-secondary mb-0">
+
+                            <i class="fa-solid fa-ban me-2"></i>
+
+                            <strong>Application Withdrawn</strong>
+
+                            <div class="small mt-1">
+                                This applicant has withdrawn their application.
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

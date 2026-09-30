@@ -1,0 +1,287 @@
+﻿@using static JobFinder.Models.Enums
+@model IEnumerable<JobFinder.Models.SavedJob>
+
+@{
+    ViewData["Title"] = "Saved Jobs";
+}
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">
+                Saved Jobs
+            </h2>
+
+            <p class="text-muted mb-0">
+                Jobs you've saved for later.
+            </p>
+        </div>
+
+        <a asp-controller="Applicant"
+           asp-action="Jobs"
+           class="btn btn-dark mt-3 mt-md-0">
+            <i class="fa-solid fa-magnifying-glass me-2"></i>
+            Find More Jobs
+        </a>
+
+    </div>
+
+
+    <!-- Saved Jobs Count -->
+    <div class="mb-4">
+        <span class="text-muted">
+            <strong>@Model.Count()</strong>
+            @(Model.Count() == 1 ? "saved job" : "saved jobs")
+        </span>
+    </div>
+
+
+    @if (!Model.Any())
+    {
+        <!-- Empty State -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center py-5">
+
+                <div class="mb-4">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light"
+                         style="width: 80px; height: 80px;">
+
+                        <i class="fa-regular fa-bookmark fa-2x text-muted"></i>
+
+                    </div>
+                </div>
+
+                <h4 class="fw-bold mb-2">
+                    No saved jobs yet
+                </h4>
+
+                <p class="text-muted mx-auto mb-4"
+                   style="max-width: 500px;">
+
+                    When you find a job you're interested in,
+                    save it and come back here when you're ready
+                    to apply.
+
+                </p>
+
+                <a asp-controller="Applicant"
+                   asp-action="Jobs"
+                   class="btn btn-primary px-4">
+
+                    <i class="fa-solid fa-magnifying-glass me-2"></i>
+                    Browse Jobs
+
+                </a>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Saved Jobs -->
+        <div class="row g-4">
+
+            @foreach (var savedJob in Model)
+            {
+                var job = savedJob.Job;
+
+                <div class="col-12">
+
+                    <div class="card border-0 shadow-sm saved-job-card">
+
+                        <div class="card-body p-4">
+
+                            <div class="row align-items-center">
+
+                                <!-- Job Information -->
+                                <div class="col-lg-7">
+
+                                    <div class="d-flex align-items-start">
+
+                                        <!-- Bookmark Icon -->
+                                        <div class="me-3">
+
+                                            <div class="d-flex align-items-center justify-content-center rounded-3 bg-light"
+                                                 style="width: 52px; height: 52px;">
+
+                                                <i class="fa-solid fa-bookmark text-primary"></i>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <!-- Job Title -->
+                                            <h5 class="fw-bold mb-1">
+
+                                                <a asp-controller="Applicant"
+                                                   asp-action="JobDetails"
+                                                   asp-route-id="@job.JobId"
+                                                   class="text-decoration-none text-dark">
+
+                                                    @job.Title
+
+                                                </a>
+
+                                            </h5>
+
+
+                                            <!-- Company -->
+                                            <p class="mb-2 text-muted">
+
+                                                <i class="fa-solid fa-building me-1"></i>
+
+                                                @(job.Employer?.CompanyName ?? "Company not specified")
+
+                                            </p>
+
+
+                                            <!-- Job Meta -->
+                                            <div class="d-flex flex-wrap gap-2">
+
+                                                @if (!string.IsNullOrWhiteSpace(job.Location))
+                                                {
+                                                    <span class="badge bg-light text-dark">
+                                                        <i class="fa-solid fa-location-dot me-1"></i>
+                                                        @job.Location
+                                                    </span>
+                                                }
+
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="fa-solid fa-briefcase me-1"></i>
+                                                    @job.JobType
+                                                </span>
+
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="fa-solid fa-building-user me-1"></i>
+                                                    @job.WorkArrangement
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Salary -->
+                                <div class="col-lg-2 mt-3 mt-lg-0">
+
+                                    <small class="text-muted d-block mb-1">
+                                        Salary
+                                    </small>
+
+                                    @if (job.SalaryMin.HasValue || job.SalaryMax.HasValue)
+                                    {
+                                        <strong class="d-block">
+
+                                            @if (job.SalaryMin.HasValue && job.SalaryMax.HasValue)
+                                            {
+                                                @($"GH₵ {job.SalaryMin:N0} - GH₵ {job.SalaryMax:N0}")
+                                            }
+                                            else if (job.SalaryMin.HasValue)
+                                            {
+                                                @($"From GH₵ {job.SalaryMin:N0}")
+                                            }
+                                            else
+                                            {
+                                                @($"Up to GH₵ {job.SalaryMax:N0}")
+                                            }
+
+                                        </strong>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            Not specified
+                                        </span>
+                                    }
+
+                                </div>
+
+
+                                <!-- Saved Date -->
+                                <div class="col-lg-1 mt-3 mt-lg-0">
+
+                                    <small class="text-muted d-block mb-1">
+                                        Saved
+                                    </small>
+
+                                    <span>
+                                        @savedJob.SavedDate.ToLocalTime().ToString("dd MMM yyyy")
+                                    </span>
+
+                                </div>
+
+
+                                <!-- Actions -->
+                                <div class="col-lg-2 mt-3 mt-lg-0">
+
+                                    <div class="d-flex flex-column gap-2">
+
+                                        <a asp-controller="Applicant"
+                                           asp-action="JobDetails"
+                                           asp-route-id="@job.JobId"
+                                           class="btn btn-primary btn-sm">
+
+                                            <i class="fa-solid fa-eye me-1"></i>
+                                            View Job
+
+                                        </a>
+
+
+                                        <form asp-controller="Applicant"
+                                              asp-action="ToggleSaveJob"
+                                              asp-route-jobId="@job.JobId"
+                                              method="post">
+
+                                            @Html.AntiForgeryToken()
+
+                                            <button type="submit"
+                                                    class="btn btn-outline-danger btn-sm w-100">
+
+                                                <i class="fa-solid fa-bookmark-slash me-1"></i>
+                                                Remove
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+
+<style>
+
+    .saved-job-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .saved-job-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08) !important;
+    }
+
+</style>

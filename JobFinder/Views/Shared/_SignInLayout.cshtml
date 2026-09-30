@@ -1,74 +1,219 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"] - JobFinder</title>
 
-    <!-- Bootstrap & Site CSS -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/JobFinder.styles.css" asp-append-version="true" />
 
-    <!-- FontAwesome Icons -->
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+
+    <!-- Application CSS -->
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/JobFinder.styles.css"
+          asp-append-version="true" />
+
+
+    <!-- FontAwesome -->
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
           integrity="sha512-0vK1F5nMObJ4xZPnHskT1bOIH6dCHcFfQFjE3P9Kq6e0IexP/j1qpQhkoyZNEqfSPKkuPsvfOykxN5aXGyv0rQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+
+        .auth-wrapper {
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 40px 20px;
+        }
+
+
+        .auth-container {
+            width: 100%;
+
+            max-width: 500px;
+        }
+
+
+        .auth-brand {
+            font-size: 1.8rem;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+
+            text-decoration: none;
+
+            color: #212529;
+        }
+
+
+        .auth-brand:hover {
+            color: #2563eb;
+        }
+
+
+        .auth-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+
+            padding: 30px;
+        }
+
+
+        .auth-footer {
+            color: #6c757d;
+
+            font-size: 0.9rem;
+        }
+
+
+        .auth-footer a {
+            color: #2563eb;
+
+            text-decoration: none;
+        }
+
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-    <!-- ========================= NAVBAR ========================= -->
-    <header>
-       
+
+
+    <!-- =========================================================
+         SIMPLE AUTHENTICATION HEADER
+         ========================================================= -->
+
+    <header class="border-bottom bg-white">
+
+        <div class="container py-3">
+
+            <a class="auth-brand"
+               asp-controller="Home"
+               asp-action="Index">
+
+                <i class="fa-solid fa-briefcase me-2"></i>
+
+                JobFinder
+
+            </a>
+
+        </div>
+
     </header>
 
-    <!-- ========================= MAIN CONTENT ========================= -->
+
+    <!-- =========================================================
+         AUTHENTICATION CONTENT
+         ========================================================= -->
+
     <main role="main">
-        @RenderBody()
+
+        <div class="auth-wrapper">
+
+            <div class="auth-container">
+
+                @RenderBody()
+
+            </div>
+
+        </div>
+
     </main>
 
-    <!-- ========================= FOOTER ========================= -->
-    <footer class="border-top footer text-muted py-3 mt-5">
-        <div class="container text-center">
-            <span>&copy; 2025 - <strong>JobFinder</strong></span> |
-            <a asp-area="" asp-controller="Home" asp-action="Privacy"
-               class="text-decoration-none text-secondary">Privacy</a> |
-            <a asp-area="" asp-controller="Home" asp-action="Help"
-               class="text-decoration-none text-secondary">Help Centre</a>
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <footer class="border-top bg-white py-3">
+
+        <div class="container text-center auth-footer">
+
+            <span>
+                &copy; 2026 <strong>JobFinder</strong>
+            </span>
+
+            <span class="mx-2">|</span>
+
+            <a asp-controller="Home"
+               asp-action="Privacy">
+
+                Privacy
+
+            </a>
+
+            <span class="mx-2">|</span>
+
+            <a asp-controller="Home"
+               asp-action="Help">
+
+                Help Centre
+
+            </a>
+
         </div>
+
     </footer>
 
-    <!-- ========================= SCRIPTS ========================= -->
+
+    <!-- =========================================================
+         SCRIPTS
+         ========================================================= -->
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 
-    <!-- ========================= CUSTOM STYLES ========================= -->
-    <style>
-        .navbar-brand {
-            font-size: 1.4rem;
-            letter-spacing: 0.5px;
-        }
-        .navbar-nav .nav-link {
-            color: #333 !important;
-            transition: color 0.3s ease;
-            margin-right: 12px;
-        }
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            color: #2563eb !important;
-        }
-        .btn-outline-primary:hover {
-            background-color: #2563eb;
-            color: white !important;
-        }
-        footer {
-            background: #f8f9fa;
-        }
-        footer a:hover {
-            color: #2563eb !important;
-        }
-    </style>
 </body>
+
 </html>
+
